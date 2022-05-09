@@ -3,6 +3,63 @@ body.welcome-page {
     overflow: auto;
 }
 
+.sungju {
+    width: 80%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap: 10px;
+    margin: 0 auto;
+    a {
+        color: white;
+    }
+    a:visited {
+        color: white;
+    }
+    #button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: green;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        font-size: 48px;
+        padding: 20px;
+        width: 400px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    #button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    #button span:after {
+        content: "\00bb";
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -40px;
+        transition: 0.5s;
+        color: red;
+    }
+
+    #button:hover span {
+        padding-right: 45px;
+        color: red;
+    }
+
+    #button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+}
+
 .welcome {
     background-image: $welcomePageBackground;
     background-color: #fff;
@@ -49,7 +106,6 @@ body.welcome-page {
             line-height: 26px;
             margin: 16px 0 32px 0;
             text-align: $welcomePageHeaderTextAlign;
-
         }
 
         #enter_room {
@@ -96,7 +152,7 @@ body.welcome-page {
                         margin-right: 15px;
 
                         svg {
-                            fill: $defaultWarningColor
+                            fill: $defaultWarningColor;
                         }
                     }
                 }
@@ -116,7 +172,6 @@ body.welcome-page {
                 position: absolute;
                 top: 84px;
             }
-
         }
 
         #moderated-meetings {
@@ -144,7 +199,7 @@ body.welcome-page {
         display: $welcomePageTabContainerDisplay;
         flex-direction: column;
 
-        .tab-content{
+        .tab-content {
             display: $welcomePageTabContentDisplay;
             height: 250px;
             margin: 5px 0px;
@@ -156,7 +211,7 @@ body.welcome-page {
         .tab-buttons {
             background-color: #c7ddff;
             border-radius: 6px;
-            color: #0163FF;
+            color: #0163ff;
             font-size: 14px;
             line-height: 18px;
             margin: 4px;
@@ -173,19 +228,18 @@ body.welcome-page {
                 text-align: center;
 
                 &.selected {
-                    background-color: #FFF;
+                    background-color: #fff;
                 }
             }
-
         }
     }
 
     .welcome-page-button {
         border: 0;
         font-size: 14px;
-        background: #0074E0;
+        background: #0074e0;
         border-radius: 3px;
-        color: #FFFFFF;
+        color: #ffffff;
         cursor: pointer;
         padding: 16px 20px;
 
@@ -238,7 +292,7 @@ body.welcome-page {
     }
 
     .welcome-cards-container {
-        color:#131519;
+        color: #131519;
         padding-top: 40px;
     }
 
@@ -262,11 +316,11 @@ body.welcome-page {
         }
 
         &--blue {
-            background: #D5E5FF;
+            background: #d5e5ff;
         }
 
         &--grey {
-            background: #F2F3F4;
+            background: #f2f3f4;
         }
 
         &--shadow {
