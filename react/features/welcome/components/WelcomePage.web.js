@@ -191,6 +191,35 @@ class WelcomePage extends AbstractWelcomePage {
 
         return (
             <div id="sungju" className="sungju">
+                <div id="enter_room">
+                    <div className="enter-room-input-container">
+                        <form onSubmit={this._onFormSubmit}>
+                            <input
+                                aria-disabled="false"
+                                aria-label="Meeting name input"
+                                autoFocus={true}
+                                className="enter-room-input"
+                                id="enter_room_field"
+                                onChange={"1"}
+                                pattern={"1"}
+                                placeholder={"1"}
+                                ref={"1"}
+                                title={"1"}
+                                type="text"
+                                value={"1"}
+                            />
+                            <div
+                                className={
+                                    _moderatedRoomServiceUrl
+                                        ? "warning-with-link"
+                                        : "warning-without-link"
+                                }
+                            >
+                                {this._renderInsecureRoomNameWarning()}
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div id="button">
                     <a href="/1">
                         <span>1번</span>
