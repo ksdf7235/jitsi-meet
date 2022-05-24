@@ -1,5 +1,6 @@
 /* global interfaceConfig */
 
+import { gql, useMutation } from "@apollo/client";
 import React from "react";
 
 import { isMobileBrowser } from "../../base/environment/utils";
@@ -190,85 +191,39 @@ class WelcomePage extends AbstractWelcomePage {
             : "without-footer";
 
         return (
-            <div id="sungju" className="sungju">
-                <div id="enter_room">
-                    <div className="enter-room-input-container">
-                        <form onSubmit={this._onFormSubmit}>
-                            <input
-                                aria-disabled="false"
-                                aria-label="Meeting name input"
-                                autoFocus={true}
-                                className="enter-room-input"
-                                id="enter_room_field"
-                                onChange={"1"}
-                                pattern={"1"}
-                                placeholder={"1"}
-                                ref={"1"}
-                                title={"1"}
-                                type="text"
-                                value={"1"}
-                            />
-                            <div
-                                className={
-                                    _moderatedRoomServiceUrl
-                                        ? "warning-with-link"
-                                        : "warning-without-link"
-                                }
-                            >
-                                {this._renderInsecureRoomNameWarning()}
-                            </div>
-                        </form>
+            <div id="sungju" className="sungju"></div>
+                <div id="sungju_header">
+                    <div id="sungju_upper_header">
+                        성주군청 마을회관 회의방 목록
+                    </div>
+                    <div id="sungju_bottom_header">
+                        <div>
+                            입장하실 회의방의 접속 버튼을 눌러 접속하세요!
+                        </div>
+                        <div id="sungju_bottom_header_icon"></div>
                     </div>
                 </div>
-                <div id="button">
-                    <a href="/1">
-                        <span>1번</span>
-                    </a>
-                </div>
-                <div id="button">
-                    <a href="/2">
-                        <span>2번</span>
-                    </a>
-                </div>
-                <div id="button">
-                    <a href="/3">
-                        <span>3번</span>
-                    </a>
-                </div>
-                <div id="button">
-                    <a href="/4">
-                        <span>4번</span>
-                    </a>
-                </div>
-                <div id="button">
-                    <a href="/5">
-                        <span>5번</span>
-                    </a>
-                </div>
-                <div id="button">
-                    <a href="/6">
-                        <span>6번</span>
-                    </a>
-                </div>
-                <div id="button">
-                    <a href="/7">
-                        <span>7번</span>
-                    </a>
-                </div>
-                <div id="button">
-                    <a href="/8">
-                        <span>8번</span>
-                    </a>
-                </div>
-                <div id="button">
-                    <a href="/9">
-                        <span>9번</span>
-                    </a>
+                <div id="Enter_Block_Layout">
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, i) => (
+                        <div id="Enter_Block" key={i}>
+                            <div id="number">
+                                <span>{i}</span>
+                            </div>
+                            <div id="title">
+                                <span>초전면</span>
+                            </div>
+                            <div id="btn">
+                                <img id="btn_img" src="/images/video.svg"></img>
+                                <a href="/1">
+                                    <span>입장하기</span>
+                                </a>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         );
     }
-
     /**
      * Renders the insecure room name warning.
      *
