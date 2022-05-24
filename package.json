@@ -16,6 +16,7 @@
     "readmeFilename": "README.md",
     "dependencies": {
         "@amplitude/react-native": "2.7.0",
+        "@apollo/client": "^3.6.5",
         "@atlaskit/button": "15.1.4",
         "@atlaskit/checkbox": "12.0.0",
         "@atlaskit/dropdown-menu": "10.1.2",
@@ -68,6 +69,7 @@
         "dropbox": "10.7.0",
         "focus-visible": "5.1.0",
         "grapheme-splitter": "1.0.4",
+        "graphql": "^16.5.0",
         "i18n-iso-countries": "6.8.0",
         "i18next": "17.0.6",
         "i18next-browser-languagedetector": "3.0.1",

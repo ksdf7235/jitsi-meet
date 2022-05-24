@@ -1,18 +1,20 @@
 // @flow
 
-import { AtlasKitThemeProvider } from '@atlaskit/theme';
-import React from 'react';
+import { AtlasKitThemeProvider } from "@atlaskit/theme";
+import React from "react";
 
-import { DialogContainer } from '../../base/dialog';
-import GlobalStyles from '../../base/ui/components/GlobalStyles';
-import JitsiThemeProvider from '../../base/ui/components/JitsiThemeProvider';
-import { ChromeExtensionBanner } from '../../chrome-extension-banner';
+import { DialogContainer } from "../../base/dialog";
+import GlobalStyles from "../../base/ui/components/GlobalStyles";
+import JitsiThemeProvider from "../../base/ui/components/JitsiThemeProvider";
+import { ChromeExtensionBanner } from "../../chrome-extension-banner";
 
-import { AbstractApp } from './AbstractApp';
+import { AbstractApp } from "./AbstractApp";
 
 // Register middlewares and reducers.
-import '../middlewares';
-import '../reducers';
+import "../middlewares";
+import "../reducers";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "../apollo";
 
 /**
  * Root app {@code Component} on Web/React.
@@ -28,13 +30,15 @@ export class App extends AbstractApp {
      */
     _createMainElement(component, props) {
         return (
-            <JitsiThemeProvider>
-                <AtlasKitThemeProvider mode = 'dark'>
-                    <GlobalStyles />
-                    <ChromeExtensionBanner />
-                    { super._createMainElement(component, props) }
-                </AtlasKitThemeProvider>
-            </JitsiThemeProvider>
+            <ApolloProvider client={client}>
+                <JitsiThemeProvider>
+                    <AtlasKitThemeProvider mode="dark">
+                        <GlobalStyles />
+                        <ChromeExtensionBanner />
+                        {super._createMainElement(component, props)}
+                    </AtlasKitThemeProvider>
+                </JitsiThemeProvider>
+            </ApolloProvider>
         );
     }
 
@@ -46,7 +50,7 @@ export class App extends AbstractApp {
     _renderDialogContainer() {
         return (
             <JitsiThemeProvider>
-                <AtlasKitThemeProvider mode = 'dark'>
+                <AtlasKitThemeProvider mode="dark">
                     <DialogContainer />
                 </AtlasKitThemeProvider>
             </JitsiThemeProvider>

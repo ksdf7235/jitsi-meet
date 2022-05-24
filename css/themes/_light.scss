@@ -1,7 +1,7 @@
 /**
  * Base
  */
-$baseLight: #FFFFFF;
+$baseLight: #ffffff;
 
 /**
 * Controls
@@ -14,7 +14,7 @@ $sliderThumbBackground: #3572b0;
 /**
 * Buttons
 */
-$buttonBackground: #44A5FF;
+$buttonBackground: #44a5ff;
 $buttonHoverBackground: #2c4062;
 $buttonBorder: transparent;
 $buttonHoverBorder: transparent;
@@ -35,13 +35,13 @@ $primaryButtonFontWeight: 400;
 
 $buttonShadowColor: #192d4f;
 
-$overlayButtonBg: #0074E0;
+$overlayButtonBg: #0074e0;
 
 /**
 * Color variables
 **/
 $defaultBackground: #474747;
-$reloadProgressBarBg: #0074E0;
+$reloadProgressBarBg: #0074e0;
 
 /**
  * Dialog colors
@@ -78,13 +78,12 @@ $secondaryToolbarBg: rgba(0, 0, 0, 0.5);
 // TOFIX: Once moved to react rename to match the side panel class name.
 $sideToolbarContainerBg: rgba(0, 0, 0, 0.75);
 $toolbarBackground: rgba(0, 0, 0, 0.5);
-$toolbarBadgeBackground: #165ECC;
-$toolbarBadgeColor: #FFFFFF;
-$toolbarButtonColor: #FFFFFF;
-$toolbarSelectBackground: rgba(0, 0, 0, .6);
-$toolbarTitleColor: #FFFFFF;
-$toolbarToggleBackground: #12499C;
-
+$toolbarBadgeBackground: #165ecc;
+$toolbarBadgeColor: #ffffff;
+$toolbarButtonColor: #ffffff;
+$toolbarSelectBackground: rgba(0, 0, 0, 0.6);
+$toolbarTitleColor: #ffffff;
+$toolbarToggleBackground: #12499c;
 
 /**
  * Forms
@@ -98,4 +97,4 @@ $selectActiveItemBg: darken($controlBackground, 20%);
 /**
  * TODO: Replace by themed component.
  */
-$videoQualityActive: #57A0ff;
+$videoQualityActive: #57a0ff;

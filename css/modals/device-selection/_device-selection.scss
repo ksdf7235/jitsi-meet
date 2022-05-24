@@ -20,7 +20,7 @@
 
         /* device-selector-trigger stylings attempt to mimic AtlasKit button */
         .device-selector-trigger {
-            background-color: #0E1624;
+            background-color: #0e1624;
             border: 1px solid #455166;
             border-radius: 5px;
             display: flex;
@@ -103,29 +103,29 @@
         font-size: 14px;
 
         a {
-            color: #6FB1EA;
+            color: #6fb1ea;
             cursor: pointer;
             text-decoration: none;
         }
 
         a:hover {
-            color: #B3D4FF;
+            color: #b3d4ff;
         }
     }
 
     .audio-input-preview {
-        background: #1B2638;
+        background: #1b2638;
         border-radius: 5px;
         height: 8px;
 
         .audio-input-preview-level {
-            background: #75B1FF;
+            background: #75b1ff;
             border-radius: 5px;
             height: 100%;
-            -webkit-transition: width .1s ease-in-out;
-            -moz-transition: width .1s ease-in-out;
-            -o-transition: width .1s ease-in-out;
-            transition: width .1s ease-in-out;
+            -webkit-transition: width 0.1s ease-in-out;
+            -moz-transition: width 0.1s ease-in-out;
+            -o-transition: width 0.1s ease-in-out;
+            transition: width 0.1s ease-in-out;
         }
     }
 }
