@@ -1,18 +1,17 @@
 // @flow
 
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 
-import { BaseApp } from '../../base/app';
-import { toURLString } from '../../base/util';
-import { OverlayContainer } from '../../overlay';
-import { appNavigate } from '../actions';
-import { getDefaultURL } from '../functions';
+import { BaseApp } from "../../base/app";
+import { toURLString } from "../../base/util";
+import { OverlayContainer } from "../../overlay";
+import { appNavigate } from "../actions";
+import { getDefaultURL } from "../functions";
 
 /**
  * The type of React {@code Component} props of {@link AbstractApp}.
  */
 export type Props = {
-
     /**
      * XXX Refer to the implementation of loadURLObject: in
      * ios/sdk/src/JitsiMeetView.m for further information.
@@ -22,7 +21,7 @@ export type Props = {
     /**
      * The URL, if any, with which the app was launched.
      */
-    url: Object | string
+    url: Object | string,
 };
 
 /**
@@ -64,11 +63,12 @@ export class AbstractApp extends BaseApp<Props, *> {
 
         // Deal with URL changes.
 
-        if (previousUrl !== currentUrl
-
+        if (
+            previousUrl !== currentUrl ||
             // XXX Refer to the implementation of loadURLObject: in
             // ios/sdk/src/JitsiMeetView.m for further information.
-            || previousTimestamp !== currentTimestamp) {
+            previousTimestamp !== currentTimestamp
+        ) {
             this._openURL(currentUrl || this._getDefaultURL());
         }
     }

@@ -1,7 +1,7 @@
 /* global interfaceConfig */
 
-import { gql, useMutation } from "@apollo/client";
 import React from "react";
+import { gql, useMutation } from "@apollo/client";
 
 import { isMobileBrowser } from "../../base/environment/utils";
 import { translate, translateToHTML } from "../../base/i18n";
@@ -14,6 +14,7 @@ import { SettingsButton, SETTINGS_TABS } from "../../settings";
 
 import { AbstractWelcomePage, _mapStateToProps } from "./AbstractWelcomePage";
 import Tabs from "./Tabs";
+import Welcome from "../../../sungju/Welcome";
 
 /**
  * The pattern used to validate room name.
@@ -189,40 +190,12 @@ class WelcomePage extends AbstractWelcomePage {
         const footerClassName = DISPLAY_WELCOME_FOOTER
             ? "with-footer"
             : "without-footer";
+        const onclick = (data) => {
+            console.log("클릭");
+            console.log(data);
+        };
 
-        return (
-            <div id="sungju" className="sungju"></div>
-                <div id="sungju_header">
-                    <div id="sungju_upper_header">
-                        성주군청 마을회관 회의방 목록
-                    </div>
-                    <div id="sungju_bottom_header">
-                        <div>
-                            입장하실 회의방의 접속 버튼을 눌러 접속하세요!
-                        </div>
-                        <div id="sungju_bottom_header_icon"></div>
-                    </div>
-                </div>
-                <div id="Enter_Block_Layout">
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, i) => (
-                        <div id="Enter_Block" key={i}>
-                            <div id="number">
-                                <span>{i}</span>
-                            </div>
-                            <div id="title">
-                                <span>초전면</span>
-                            </div>
-                            <div id="btn">
-                                <img id="btn_img" src="/images/video.svg"></img>
-                                <a href="/1">
-                                    <span>입장하기</span>
-                                </a>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        );
+        return <Welcome />;
     }
     /**
      * Renders the insecure room name warning.

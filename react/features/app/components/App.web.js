@@ -1,5 +1,6 @@
 // @flow
 
+import { ApolloProvider } from "@apollo/client";
 import { AtlasKitThemeProvider } from "@atlaskit/theme";
 import React from "react";
 
@@ -9,12 +10,11 @@ import JitsiThemeProvider from "../../base/ui/components/JitsiThemeProvider";
 import { ChromeExtensionBanner } from "../../chrome-extension-banner";
 
 import { AbstractApp } from "./AbstractApp";
+import { client } from "../apollo";
 
 // Register middlewares and reducers.
 import "../middlewares";
 import "../reducers";
-import { ApolloProvider } from "@apollo/client";
-import { client } from "../apollo";
 
 /**
  * Root app {@code Component} on Web/React.

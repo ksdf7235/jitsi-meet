@@ -1,0 +1,66 @@
+export const dummy = [
+    {
+        id: "1",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+    {
+        id: "2",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+    {
+        id: "3",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+    {
+        id: "4",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+    {
+        id: "5",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+    {
+        id: "6",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+
+    {
+        id: "7",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+    {
+        id: "8",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+    {
+        id: "9",
+        hostNameEng: "chojeon",
+        hostNameKr: "초전면",
+        participantNameKr: "초전면",
+        participantNameEng: "chojeon",
+    },
+];
