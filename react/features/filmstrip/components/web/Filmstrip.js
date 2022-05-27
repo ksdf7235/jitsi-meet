@@ -616,7 +616,7 @@ class Filmstrip extends PureComponent <Props, State> {
             || isNaN(_filmstripWidth)) {
             return null;
         }
-
+        //0527
         if (_currentLayout === LAYOUTS.TILE_VIEW || _verticalViewGrid || _stageFilmstrip) {
             return (
                 <FixedSizeGrid

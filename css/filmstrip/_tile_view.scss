@@ -28,13 +28,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: margin-bottom .3s ease-in;
+        transition: margin-bottom 0.3s ease-in;
     }
 
     .filmstrip {
         align-items: center;
         display: flex;
-        height: 100%;
+        height: 90%;
         justify-content: center;
         left: 0;
         position: absolute;
@@ -68,7 +68,6 @@
 
     .remote-videos {
         box-sizing: border-box;
-
 
         /**
         * The size of the thumbnails should be set with javascript, based on

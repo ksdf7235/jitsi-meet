@@ -1,19 +1,21 @@
 // @flow
 
-import { makeStyles } from '@material-ui/styles';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { makeStyles } from "@material-ui/styles";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import { isDisplayNameVisible, isNameReadOnly } from '../../../base/config/functions.any';
-import DisplayName from '../../../display-name/components/web/DisplayName';
-import { THUMBNAIL_TYPE } from '../../constants';
+import {
+    isDisplayNameVisible,
+    isNameReadOnly,
+} from "../../../base/config/functions.any";
+import DisplayName from "../../../display-name/components/web/DisplayName";
+import { THUMBNAIL_TYPE } from "../../constants";
 
-import StatusIndicators from './StatusIndicators';
+import StatusIndicators from "./StatusIndicators";
 
 declare var interfaceConfig: Object;
 
 type Props = {
-
     /**
      * Class name for indicators container.
      */
@@ -37,25 +39,24 @@ type Props = {
     /**
      * The type of thumbnail.
      */
-    thumbnailType: string
-}
+    thumbnailType: string,
+};
 
 const useStyles = makeStyles(() => {
     return {
         nameContainer: {
-            display: 'flex',
-            overflow: 'hidden',
-            padding: '2px 0',
+            display: "flex",
+            padding: "2px 0",
 
-            '&>div': {
-                display: 'flex',
-                overflow: 'hidden'
+            "&>div": {
+                display: "flex",
+                fontSize: "60px",
             },
 
-            '&:first-child': {
-                marginLeft: '6px'
-            }
-        }
+            "&:first-child": {
+                marginLeft: "6px",
+            },
+        },
     };
 });
 
@@ -64,35 +65,43 @@ const ThumbnailBottomIndicators = ({
     local,
     participantId,
     showStatusIndicators = true,
-    thumbnailType
+    thumbnailType,
 }: Props) => {
     const styles = useStyles();
     const _allowEditing = !useSelector(isNameReadOnly);
     const _defaultLocalDisplayName = interfaceConfig.DEFAULT_LOCAL_DISPLAY_NAME;
     const _showDisplayName = useSelector(isDisplayNameVisible);
 
-    return (<div className = { className }>
-        {
-            showStatusIndicators && <StatusIndicators
-                audio = { true }
-                moderator = { true }
-                participantID = { participantId }
-                screenshare = { thumbnailType === THUMBNAIL_TYPE.TILE }
-                thumbnailType = { thumbnailType } />
-        }
-        {
-            _showDisplayName && (
-                <span className = { styles.nameContainer }>
+    return (
+        <div className={className}>
+            {showStatusIndicators && (
+                <StatusIndicators
+                    audio={true}
+                    moderator={true}
+                    participantID={participantId}
+                    screenshare={thumbnailType === THUMBNAIL_TYPE.TILE}
+                    thumbnailType={thumbnailType}
+                />
+            )}
+            {_showDisplayName && (
+                <span className={styles.nameContainer}>
                     <DisplayName
-                        allowEditing = { local ? _allowEditing : false }
-                        displayNameSuffix = { local ? _defaultLocalDisplayName : '' }
-                        elementID = { local ? 'localDisplayName' : `participant_${participantId}_name` }
-                        participantID = { participantId }
-                        thumbnailType = { thumbnailType } />
+                        allowEditing={local ? _allowEditing : false}
+                        displayNameSuffix={
+                            local ? _defaultLocalDisplayName : ""
+                        }
+                        elementID={
+                            local
+                                ? "localDisplayName"
+                                : `participant_${participantId}_name`
+                        }
+                        participantID={participantId}
+                        thumbnailType={thumbnailType}
+                    />
                 </span>
-            )
-        }
-    </div>);
+            )}
+        </div>
+    );
 };
 
 export default ThumbnailBottomIndicators;

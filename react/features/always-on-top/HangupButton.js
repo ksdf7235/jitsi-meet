@@ -1,12 +1,12 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // We need to reference these files directly to avoid loading things that are not available
 // in this environment (e.g. JitsiMeetJS or interfaceConfig)
-import { IconHangup } from '../base/icons';
-import type { Props } from '../base/toolbox/components/AbstractButton';
+import { IconHangup } from "../base/icons";
+import type { Props } from "../base/toolbox/components/AbstractButton";
 
-import ToolbarButton from './ToolbarButton';
+import ToolbarButton from "./ToolbarButton";
 
 const { api } = window.alwaysOnTop;
 
@@ -14,8 +14,7 @@ const { api } = window.alwaysOnTop;
  * Stateless hangup button for the Always-on-Top windows.
  */
 export default class HangupButton extends Component<Props, *> {
-
-    accessibilityLabel = 'Hangup';
+    accessibilityLabel = "Hangup";
     icon = IconHangup;
 
     /**
@@ -40,7 +39,9 @@ export default class HangupButton extends Component<Props, *> {
      * @returns {void}
      */
     _onClick() {
-        api.executeCommand('hangup');
+        //0527 나가기버튼
+        console.log("클릭됨");
+        // api.executeCommand("hangup");
     }
 
     /**
@@ -49,11 +50,15 @@ export default class HangupButton extends Component<Props, *> {
      * @inheritdoc
      * @returns {ReactElement}
      */
+
     render() {
-        return (<ToolbarButton
-            accessibilityLabel = { this.accessibilityLabel }
-            customClass = 'hangup-button'
-            icon = { this.icon }
-            onClick = { this._onClick } />);
+        return (
+            <ToolbarButton
+                accessibilityLabel={this.accessibilityLabel}
+                customClass="hangup-button"
+                icon={this.icon}
+                onClick={this._onClick}
+            />
+        );
     }
 }

@@ -16,8 +16,8 @@
     bottom: 0;
     z-index: 100;
     width: 100vw;
-    height: 10vh;
-    background-color: #FFFFFF;
+    min-height: 10vh;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,7 +39,7 @@
 
 #videospace {
     display: block;
-    height: 100%;
+    height: 90%;
     width: 100%;
     min-height: 100%;
     position: absolute;
@@ -47,6 +47,7 @@
     left: 0px;
     right: 0px;
     overflow: hidden;
+    object-fit: contain;
 }
 
 #largeVideoBackgroundContainer,
@@ -70,11 +71,11 @@
 .videocontainer {
     position: relative;
     text-align: center;
-    overflow: 'hidden';
+    overflow: "hidden";
 }
 
 #localVideoWrapper {
-    display:inline-block;
+    display: inline-block;
 }
 
 .flipVideoX {
@@ -112,8 +113,7 @@
 }
 
 #largeVideo,
-#largeVideoWrapper
-{
+#largeVideoWrapper {
     object-fit: cover;
 }
 
@@ -132,10 +132,10 @@
 #localVideoWrapper object,
 #localVideoWrapper,
 #largeVideoWrapper,
-#largeVideoWrapper>video,
-#largeVideoWrapper>object,
-.videocontainer>video,
-.videocontainer>object {
+#largeVideoWrapper > video,
+#largeVideoWrapper > object,
+.videocontainer > video,
+.videocontainer > object {
     position: absolute;
     left: 0;
     top: 0;
@@ -164,8 +164,8 @@
 /**
  * Audio indicator on video thumbnails.
  */
-.videocontainer>span.audioindicator,
-.videocontainer>.audioindicator-container {
+.videocontainer > span.audioindicator,
+.videocontainer > .audioindicator-container {
     position: absolute;
     display: inline-block;
     left: 6px;
@@ -184,8 +184,8 @@
         @include circle(5px);
         background: $audioLevelShadow;
         margin: 1px 0 1px 0;
-        transition: opacity .25s ease-in-out;
-        -moz-transition: opacity .25s ease-in-out;
+        transition: opacity 0.25s ease-in-out;
+        -moz-transition: opacity 0.25s ease-in-out;
     }
 
     span.audiodot-top::after,
@@ -205,9 +205,9 @@
 #reloadPresentation {
     display: none;
     position: absolute;
-    color: #FFFFFF;
+    color: #ffffff;
     top: 0;
-    right:0;
+    right: 0;
     padding: 10px 10px;
     font-size: 11pt;
     cursor: pointer;
@@ -230,7 +230,7 @@
 }
 
 #mixedstream {
-    display:none !important;
+    display: none !important;
 }
 
 #dominantSpeakerAvatarContainer,
@@ -303,8 +303,8 @@
 }
 
 .videoMessageFilter {
-    -webkit-filter: grayscale(.5) opacity(0.8);
-    filter: grayscale(.5) opacity(0.8);
+    -webkit-filter: grayscale(0.5) opacity(0.8);
+    filter: grayscale(0.5) opacity(0.8);
 }
 
 #remotePresenceMessage,
@@ -315,19 +315,17 @@
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    color: #FFF;
+    color: #fff;
     left: 50%;
     transform: translate(-50%, 0);
 }
 #remotePresenceMessage .presence-label,
 #remoteConnectionMessage {
-    opacity: .80;
-    text-shadow:    0px 0px 1px rgba(0,0,0,0.3),
-                    0px 1px 1px rgba(0,0,0,0.3),
-                    1px 0px 1px rgba(0,0,0,0.3),
-                    0px 0px 1px rgba(0,0,0,0.3);
+    opacity: 0.8;
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3),
+        1px 0px 1px rgba(0, 0, 0, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.3);
 
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     padding: 5px;
     padding-left: 10px;

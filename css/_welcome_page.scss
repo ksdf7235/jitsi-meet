@@ -7,7 +7,10 @@ body.welcome-page {
     width: 100%;
     min-height: 100vh;
     background-color: #f0f1f3;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     a {
         color: white;
     }
@@ -18,6 +21,7 @@ body.welcome-page {
         width: 100%;
         height: 8vh;
         position: fixed;
+        background-color: #f0f1f3;
         top: 0;
         left: 0;
         display: flex;
@@ -45,9 +49,8 @@ body.welcome-page {
         width: 80%;
         grid-template-columns: repeat(3, 1fr);
         grid-auto-rows: minmax(100px, 1fr);
-        gap: 10px;
-        padding-top: 10rem;
-        margin: 20px auto;
+        gap: 20px;
+        margin: 15vh 20px auto;
 
         #button {
             display: inline-block;
@@ -95,17 +98,17 @@ body.welcome-page {
                 #btn_img {
                     margin-right: 5px;
                 }
-                a:link{
+                a:link {
                     color: white;
-                    text-decoration:none;
+                    text-decoration: none;
                 }
-                a:visited{
+                a:visited {
                     color: white;
-                    text-decoration:none;
+                    text-decoration: none;
                 }
                 a:hover {
                     color: white;
-                    text-decoration:none;
+                    text-decoration: none;
                 }
             }
         }

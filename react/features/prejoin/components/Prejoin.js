@@ -35,6 +35,8 @@ import {
 
 import DropdownButton from "./DropdownButton";
 import JoinByPhoneDialog from "./dialogs/JoinByPhoneDialog";
+import { useMutation } from "@apollo/client";
+import { ENTER_QUERY } from "../../../sungju/mutation";
 
 type Props = {
     /**
@@ -174,7 +176,12 @@ class Prejoin extends Component<Props, State> {
         this.setState({ showError: false });
         this.props.joinConference();
         //prejoin 버튼 동작하는 곳(0527)
-        console.log(this.props.name);
+        const [data] = useMutation(ENTER_QUERY);
+        data({
+            variables: {
+                participantNameKr: this.props.name,
+            },
+        });
     }
 
     _onJoinKeyPress: (Object) => void;
