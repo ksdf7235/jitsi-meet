@@ -1,52 +1,23 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React from "react";
 import { dummy } from "./dummy";
-
-const EXAMPLE_QUERY = gql`
-    query ExampleQuery {
-        sungjues {
-            id
-        }
-    }
-`;
-const EXAMPLE_MUTATION = gql`
-    mutation ExampleMutation(
-        $hostNameEng: String!,
-        $hostNameKr: String!,
-        $participantNameEng: String!,
-        $participantNameKr: String!
-    ) {
-        createSungju(
-            hostNameEng: $hostNameEng,
-            hostNameKr: $hostNameKr,
-            participantNameEng: $participantNameEng,
-            participantNameKr: $participantNameKr
-        ) {
-            ok
-        }
-    }
-`;
+import { ENTER_QUERY } from "./mutation";
 
 function Welcome() {
-    const { data } = useQuery(EXAMPLE_QUERY);
-    const [sungju] = useMutation(EXAMPLE_MUTATION);
-    const onClick = (item) => {
-        const {
-            hostNameEng,
-            hostNameKr,
-            participantNameEng,
-            participantNameKr,
-        } = item;
+    const testname = "경산1리";
 
-        sungju({
+    const [data] = useMutation(ENTER_QUERY);
+
+    const test = (item) => {
+        console.log("test");
+        const value = data({
             variables: {
-                hostNameEng,
-                hostNameKr,
-                participantNameEng,
-                participantNameKr
+                participantNameKr: testname,
             },
         });
+        console.log(value);
     };
+
     return (
         <div id="sungju" className="sungju">
             <div id="sungju_header">
@@ -60,7 +31,7 @@ function Welcome() {
             </div>
             <div id="Enter_Block_Layout">
                 {dummy.map((item, i) => (
-                    <div id="Enter_Block" key={i} onClick={() => onClick(item)}>
+                    <div id="Enter_Block" key={i} onClick={() => test(item)}>
                         <div id="number">
                             <span>{item.id}</span>
                         </div>
@@ -69,7 +40,7 @@ function Welcome() {
                         </div>
                         <div id="btn">
                             <img id="btn_img" src="/images/video.svg"></img>
-                            <a href="/1">
+                            <a href={`/${item.hostNameEng}`}>
                                 <span>입장하기</span>
                             </a>
                         </div>

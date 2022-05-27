@@ -190,10 +190,6 @@ class WelcomePage extends AbstractWelcomePage {
         const footerClassName = DISPLAY_WELCOME_FOOTER
             ? "with-footer"
             : "without-footer";
-        const onclick = (data) => {
-            console.log("클릭");
-            console.log(data);
-        };
 
         return <Welcome />;
     }

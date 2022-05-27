@@ -1,36 +1,48 @@
 import { gql } from "@apollo/client";
 
-export const ENTER_MUTATION = gql`
-            mutation Sungju(
-                $hostNameEng: String!
-                $hostNameKr: String!
-                $participantNameKr: String!
-                $participantNameEng:: String!
-            ) {
-                createSungju(
-                    hostNameEng: $hostNameEng
-                    hostNameKr: $hostNameKr
-                    participantNameKr: $participantNameKr
-                    participantNameEng:: $participantNameEng:
-                ) {
-                    ok
-                }
-            }
-        `;
+export const EXAMPLE_QUERY = gql`
+    query ExampleQuery {
+        sungjues {
+            id
+        }
+    }
+`;
+export const FIND_QUERY = gql`
+    query ExampleQuery($participantNameKr: String!) {
+        sungju(participantNameKr: $participantNameKr) {
+            id
+        }
+    }
+`;
+export const EXAMPLE_MUTATION = gql`
+    mutation ExampleMutation(
+        $hostNameEng: String!
+        $hostNameKr: String!
+        $participantNameEng: String!
+        $participantNameKr: String!
+    ) {
+        createSungju(
+            hostNameEng: $hostNameEng
+            hostNameKr: $hostNameKr
+            participantNameEng: $participantNameEng
+            participantNameKr: $participantNameKr
+        ) {
+            ok
+        }
+    }
+`;
+
 export const ENTER_QUERY = gql`
-            mutation Sungju(
-                $hostNameEng: String!
-                $hostNameKr: String!
-                $participantNameKr: String!
-                $participantNameEng:: String!
-            ) {
-                createSungju(
-                    hostNameEng: $hostNameEng
-                    hostNameKr: $hostNameKr
-                    participantNameKr: $participantNameKr
-                    participantNameEng:: $participantNameEng:
-                ) {
-                    ok
-                }
-            }
-        `;
+    mutation EnterMutation($participantNameKr: String!) {
+        EnterTime(participantNameKr: $participantNameKr) {
+            ok
+        }
+    }
+`;
+export const EXIT_QUERY = gql`
+    mutation ExitMutation($participantNameKr: String!) {
+        ExitTime(participantNameKr: $participantNameKr) {
+            ok
+        }
+    }
+`;
