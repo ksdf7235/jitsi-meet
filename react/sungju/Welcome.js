@@ -15,7 +15,6 @@ function Welcome() {
                 participantNameKr: testname,
             },
         });
-        console.log(value);
     };
 
     return (
