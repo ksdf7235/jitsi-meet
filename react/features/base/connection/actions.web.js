@@ -1,20 +1,20 @@
 // @flow
 
-import type { Dispatch } from 'redux';
+import type { Dispatch } from "redux";
 
 declare var APP: Object;
 declare var config: Object;
 
-import { configureInitialDevices } from '../devices';
-import { getBackendSafeRoomName } from '../util';
+import { configureInitialDevices } from "../devices";
+import { getBackendSafeRoomName } from "../util";
 
 export {
     connectionDisconnected,
     connectionEstablished,
     connectionFailed,
-    setLocationURL
-} from './actions.native';
-import logger from './logger';
+    setLocationURL,
+} from "./actions.native";
+import logger from "./logger";
 
 /**
  * Opens new connection.
@@ -23,17 +23,22 @@ import logger from './logger';
  */
 export function connect() {
     return (dispatch: Dispatch<any>, getState: Function) => {
-        const room = getBackendSafeRoomName(getState()['features/base/conference'].room);
+        const room = getBackendSafeRoomName(
+            getState()["features/base/conference"].room
+        );
 
         // XXX For web based version we use conference initialization logic
         // from the old app (at the moment of writing).
-        return dispatch(configureInitialDevices()).then(
-            () => APP.conference.init({
-                roomName: room
-            }).catch(error => {
-                APP.API.notifyConferenceLeft(APP.conference.roomName);
-                logger.error(error);
-            }));
+        return dispatch(configureInitialDevices()).then(() =>
+            APP.conference
+                .init({
+                    roomName: room,
+                })
+                .catch((error) => {
+                    APP.API.notifyConferenceLeft(APP.conference.roomName);
+                    logger.error(error);
+                })
+        );
     };
 }
 

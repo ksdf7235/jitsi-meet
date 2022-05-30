@@ -143,7 +143,6 @@ class Prejoin extends Component<Props, State> {
             showError: false,
             showJoinByPhoneButtons: false,
         };
-
         this._closeDialog = this._closeDialog.bind(this);
         this._showDialog = this._showDialog.bind(this);
         this._onJoinButtonClick = this._onJoinButtonClick.bind(this);
@@ -175,6 +174,7 @@ class Prejoin extends Component<Props, State> {
 
         this.setState({ showError: false });
         this.props.joinConference();
+
         //prejoin 버튼 동작하는 곳(0527)
         const [data] = useMutation(ENTER_QUERY);
         data({

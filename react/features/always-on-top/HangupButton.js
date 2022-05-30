@@ -39,9 +39,7 @@ export default class HangupButton extends Component<Props, *> {
      * @returns {void}
      */
     _onClick() {
-        //0527 나가기버튼
-        console.log("클릭됨");
-        // api.executeCommand("hangup");
+        api.executeCommand("hangup");
     }
 
     /**

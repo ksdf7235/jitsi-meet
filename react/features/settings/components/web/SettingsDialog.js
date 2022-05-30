@@ -1,36 +1,36 @@
 // @flow
 
-import { withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
+import { withStyles } from "@material-ui/styles";
+import React, { Component } from "react";
 
-import { getAvailableDevices } from '../../../base/devices';
-import { DialogWithTabs, hideDialog } from '../../../base/dialog';
-import { connect } from '../../../base/redux';
-import { isCalendarEnabled } from '../../../calendar-sync';
+import { getAvailableDevices } from "../../../base/devices";
+import { DialogWithTabs, hideDialog } from "../../../base/dialog";
+import { connect } from "../../../base/redux";
+import { isCalendarEnabled } from "../../../calendar-sync";
 import {
     DeviceSelection,
     getDeviceSelectionDialogProps,
-    submitDeviceSelectionTab
-} from '../../../device-selection';
+    submitDeviceSelectionTab,
+} from "../../../device-selection";
 import {
     submitModeratorTab,
     submitMoreTab,
     submitProfileTab,
-    submitSoundsTab
-} from '../../actions';
-import { SETTINGS_TABS } from '../../constants';
+    submitSoundsTab,
+} from "../../actions";
+import { SETTINGS_TABS } from "../../constants";
 import {
     getModeratorTabProps,
     getMoreTabProps,
     getProfileTabProps,
-    getSoundsTabProps
-} from '../../functions';
+    getSoundsTabProps,
+} from "../../functions";
 
-import CalendarTab from './CalendarTab';
-import ModeratorTab from './ModeratorTab';
-import MoreTab from './MoreTab';
-import ProfileTab from './ProfileTab';
-import SoundsTab from './SoundsTab';
+import CalendarTab from "./CalendarTab";
+import ModeratorTab from "./ModeratorTab";
+import MoreTab from "./MoreTab";
+import ProfileTab from "./ProfileTab";
+import SoundsTab from "./SoundsTab";
 
 declare var interfaceConfig: Object;
 
@@ -39,7 +39,6 @@ declare var interfaceConfig: Object;
  * {@link ConnectedSettingsDialog}.
  */
 type Props = {
-
     /**
      * An object containing the CSS classes.
      */
@@ -59,7 +58,7 @@ type Props = {
     /**
      * Invoked to save changed settings.
      */
-    dispatch: Function
+    dispatch: Function,
 };
 
 /**
@@ -69,106 +68,104 @@ type Props = {
  *
  * @returns {Object}
  */
-const styles = theme => {
+const styles = (theme) => {
     return {
         settingsDialog: {
-            display: 'flex',
-            width: '100%',
+            display: "flex",
+            width: "100%",
 
-            '&.profile-pane': {
-                flexDirection: 'column'
+            "&.profile-pane": {
+                flexDirection: "column",
             },
 
-            '& .auth-name': {
-                marginBottom: `${theme.spacing(1)}px`
+            "& .auth-name": {
+                marginBottom: `${theme.spacing(1)}px`,
             },
 
-            '& .calendar-tab, & .device-selection': {
-                marginTop: '20px'
+            "& .calendar-tab, & .device-selection": {
+                marginTop: "20px",
             },
 
-            '& .mock-atlaskit-label': {
-                color: '#b8c7e0',
-                fontSize: '12px',
+            "& .mock-atlaskit-label": {
+                color: "#b8c7e0",
+                fontSize: "12px",
                 fontWeight: 600,
                 lineHeight: 1.33,
-                padding: `20px 0px ${theme.spacing(1)}px 0px`
+                padding: `20px 0px ${theme.spacing(1)}px 0px`,
             },
 
             '& input[type="checkbox"]:checked + svg': {
-                '--checkbox-background-color': '#6492e7',
-                '--checkbox-border-color': '#6492e7'
+                "--checkbox-background-color": "#6492e7",
+                "--checkbox-border-color": "#6492e7",
             },
 
             '& input[type="checkbox"] + svg + span': {
-                color: '#9FB0CC'
+                color: "#9FB0CC",
             },
 
-            [[ '& .calendar-tab',
-                '& .more-tab',
-                '& .box' ]]: {
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%'
+            [["& .calendar-tab", "& .more-tab", "& .box"]]: {
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
             },
 
-            '& .profile-edit': {
-                display: 'flex',
-                width: '100%'
+            "& .profile-edit": {
+                display: "flex",
+                width: "100%",
             },
 
-            '& .profile-edit-field': {
+            "& .profile-edit-field": {
                 flex: 0.5,
-                marginRight: '20px'
+                marginRight: "20px",
             },
 
-            '& .settings-sub-pane': {
-                flex: 1
+            "& .settings-sub-pane": {
+                flex: 1,
             },
 
-            '& .settings-sub-pane .right': {
-                flex: 1
+            "& .settings-sub-pane .right": {
+                flex: 1,
             },
-            '& .settings-sub-pane .left': {
-                flex: 1
-            },
-
-            '& .settings-sub-pane-element': {
-                textAlign: 'left',
-                flex: 1
+            "& .settings-sub-pane .left": {
+                flex: 1,
             },
 
-            '& .moderator-settings-wrapper': {
-                paddingTop: '20px'
+            "& .settings-sub-pane-element": {
+                textAlign: "left",
+                flex: 1,
             },
 
-            '& .calendar-tab': {
-                alignItems: 'center',
-                flexDirection: 'column',
-                fontSize: '14px',
-                minHeight: '100px',
-                textAlign: 'center'
+            "& .moderator-settings-wrapper": {
+                paddingTop: "20px",
             },
 
-            '& .calendar-tab-sign-in': {
-                marginTop: '20px'
+            "& .calendar-tab": {
+                alignItems: "center",
+                flexDirection: "column",
+                fontSize: "14px",
+                minHeight: "100px",
+                textAlign: "center",
             },
 
-            '& .sign-out-cta': {
-                marginBottom: '20px'
+            "& .calendar-tab-sign-in": {
+                marginTop: "20px",
             },
 
-            '@media only screen and (max-width: 700px)': {
-                '& .device-selection': {
-                    display: 'flex',
-                    flexDirection: 'column'
+            "& .sign-out-cta": {
+                marginBottom: "20px",
+            },
+
+            "@media only screen and (max-width: 700px)": {
+                "& .device-selection": {
+                    display: "flex",
+                    flexDirection: "column",
                 },
 
-                '& .more-tab': {
-                    flexDirection: 'column'
-                }
-            }
-        }
+                "& .more-tab": {
+                    flexDirection: "column",
+                },
+            },
+        },
     };
 };
 
@@ -202,29 +199,29 @@ class SettingsDialog extends Component<Props> {
     render() {
         const { _tabs, defaultTab, dispatch } = this.props;
         const onSubmit = this._closeDialog;
-        const defaultTabIdx
-            = _tabs.findIndex(({ name }) => name === defaultTab);
-        const tabs = _tabs.map(tab => {
+        const defaultTabIdx = _tabs.findIndex(
+            ({ name }) => name === defaultTab
+        );
+        const tabs = _tabs.map((tab) => {
             return {
                 ...tab,
                 onMount: tab.onMount
                     ? (...args) => dispatch(tab.onMount(...args))
                     : undefined,
-                submit: (...args) => tab.submit
-                    && dispatch(tab.submit(...args))
+                submit: (...args) =>
+                    tab.submit && dispatch(tab.submit(...args)),
             };
         });
 
         return (
             <DialogWithTabs
-                closeDialog = { this._closeDialog }
-                cssClassName = 'settings-dialog'
-                defaultTab = {
-                    defaultTabIdx === -1 ? undefined : defaultTabIdx
-                }
-                onSubmit = { onSubmit }
-                tabs = { tabs }
-                titleKey = 'settings.title' />
+                closeDialog={this._closeDialog}
+                cssClassName="settings-dialog"
+                defaultTab={defaultTabIdx === -1 ? undefined : defaultTabIdx}
+                onSubmit={onSubmit}
+                tabs={tabs}
+                titleKey="settings.title"
+            />
         );
     }
 
@@ -257,24 +254,32 @@ function _mapStateToProps(state, ownProps) {
     const configuredTabs = interfaceConfig.SETTINGS_SECTIONS || [];
 
     // The settings sections to display.
-    const showDeviceSettings = configuredTabs.includes('devices');
+    const showDeviceSettings = configuredTabs.includes("devices");
     const moreTabProps = getMoreTabProps(state);
     const moderatorTabProps = getModeratorTabProps(state);
     const { showModeratorSettings } = moderatorTabProps;
-    const { showLanguageSettings, showNotificationsSettings, showPrejoinSettings } = moreTabProps;
-    const showMoreTab = showLanguageSettings || showNotificationsSettings || showPrejoinSettings;
-    const showProfileSettings
-        = configuredTabs.includes('profile') && !state['features/base/config'].disableProfile;
-    const showCalendarSettings
-        = configuredTabs.includes('calendar') && isCalendarEnabled(state);
-    const showSoundsSettings = configuredTabs.includes('sounds');
+    const {
+        showLanguageSettings,
+        showNotificationsSettings,
+        showPrejoinSettings,
+    } = moreTabProps;
+    const showMoreTab =
+        showLanguageSettings ||
+        showNotificationsSettings ||
+        showPrejoinSettings;
+    const showProfileSettings =
+        configuredTabs.includes("profile") &&
+        !state["features/base/config"].disableProfile;
+    const showCalendarSettings =
+        configuredTabs.includes("calendar") && isCalendarEnabled(state);
+    const showSoundsSettings = configuredTabs.includes("sounds");
     const tabs = [];
 
     if (showDeviceSettings) {
         tabs.push({
             name: SETTINGS_TABS.DEVICES,
             component: DeviceSelection,
-            label: 'settings.devices',
+            label: "settings.devices",
             onMount: getAvailableDevices,
             props: getDeviceSelectionDialogProps(state),
             propsUpdateFunction: (tabState, newProps) => {
@@ -288,11 +293,11 @@ function _mapStateToProps(state, ownProps) {
                     ...newProps,
                     selectedAudioInputId: tabState.selectedAudioInputId,
                     selectedAudioOutputId: tabState.selectedAudioOutputId,
-                    selectedVideoInputId: tabState.selectedVideoInputId
+                    selectedVideoInputId: tabState.selectedVideoInputId,
                 };
             },
             styles: `settings-pane ${classes.settingsDialog} devices-pane`,
-            submit: submitDeviceSelectionTab
+            submit: submitDeviceSelectionTab,
         });
     }
 
@@ -300,10 +305,10 @@ function _mapStateToProps(state, ownProps) {
         tabs.push({
             name: SETTINGS_TABS.PROFILE,
             component: ProfileTab,
-            label: 'profile.title',
+            label: "profile.title",
             props: getProfileTabProps(state),
             styles: `settings-pane ${classes.settingsDialog} profile-pane`,
-            submit: submitProfileTab
+            submit: submitProfileTab,
         });
     }
 
@@ -311,7 +316,7 @@ function _mapStateToProps(state, ownProps) {
         tabs.push({
             name: SETTINGS_TABS.MODERATOR,
             component: ModeratorTab,
-            label: 'settings.moderator',
+            label: "settings.moderator",
             props: moderatorTabProps,
             propsUpdateFunction: (tabState, newProps) => {
                 // Updates tab props, keeping users selection
@@ -321,11 +326,11 @@ function _mapStateToProps(state, ownProps) {
                     followMeEnabled: tabState?.followMeEnabled,
                     startAudioMuted: tabState?.startAudioMuted,
                     startVideoMuted: tabState?.startVideoMuted,
-                    startReactionsMuted: tabState?.startReactionsMuted
+                    startReactionsMuted: tabState?.startReactionsMuted,
                 };
             },
             styles: `settings-pane ${classes.settingsDialog} moderator-pane`,
-            submit: submitModeratorTab
+            submit: submitModeratorTab,
         });
     }
 
@@ -333,8 +338,8 @@ function _mapStateToProps(state, ownProps) {
         tabs.push({
             name: SETTINGS_TABS.CALENDAR,
             component: CalendarTab,
-            label: 'settings.calendar.title',
-            styles: `settings-pane ${classes.settingsDialog} calendar-pane`
+            label: "settings.calendar.title",
+            styles: `settings-pane ${classes.settingsDialog} calendar-pane`,
         });
     }
 
@@ -342,10 +347,10 @@ function _mapStateToProps(state, ownProps) {
         tabs.push({
             name: SETTINGS_TABS.SOUNDS,
             component: SoundsTab,
-            label: 'settings.sounds',
+            label: "settings.sounds",
             props: getSoundsTabProps(state),
             styles: `settings-pane ${classes.settingsDialog} profile-pane`,
-            submit: submitSoundsTab
+            submit: submitSoundsTab,
         });
     }
 
@@ -353,7 +358,7 @@ function _mapStateToProps(state, ownProps) {
         tabs.push({
             name: SETTINGS_TABS.MORE,
             component: MoreTab,
-            label: 'settings.more',
+            label: "settings.more",
             props: moreTabProps,
             propsUpdateFunction: (tabState, newProps) => {
                 // Updates tab props, keeping users selection
@@ -365,11 +370,11 @@ function _mapStateToProps(state, ownProps) {
                     hideSelfView: tabState?.hideSelfView,
                     showPrejoinPage: tabState?.showPrejoinPage,
                     enabledNotifications: tabState?.enabledNotifications,
-                    maxStageParticipants: tabState?.maxStageParticipants
+                    maxStageParticipants: tabState?.maxStageParticipants,
                 };
             },
             styles: `settings-pane ${classes.settingsDialog} more-pane`,
-            submit: submitMoreTab
+            submit: submitMoreTab,
         });
     }
 

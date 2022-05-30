@@ -16,7 +16,7 @@
     bottom: 0;
     z-index: 100;
     width: 100vw;
-    min-height: 10vh;
+    height: 10vh;
     background-color: #ffffff;
     display: flex;
     align-items: center;
@@ -36,7 +36,7 @@
     font-size: 2rem;
     text-align: center;
 }
-
+//타일 오버플로우(0527)
 #videospace {
     display: block;
     height: 90%;
