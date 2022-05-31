@@ -1,25 +1,24 @@
 /* @flow */
 
-import { withStyles } from '@material-ui/styles';
-import React, { Component } from 'react';
-import type { Dispatch } from 'redux';
+import { withStyles } from "@material-ui/styles";
+import React, { Component } from "react";
+import type { Dispatch } from "redux";
 
-import { translate } from '../../../base/i18n';
+import { translate } from "../../../base/i18n";
 import {
     getParticipantDisplayName,
-    getParticipantById
-} from '../../../base/participants';
-import { connect } from '../../../base/redux';
-import { updateSettings } from '../../../base/settings';
-import { Tooltip } from '../../../base/tooltip';
-import { getIndicatorsTooltipPosition } from '../../../filmstrip/functions.web';
-import { appendSuffix } from '../../functions';
+    getParticipantById,
+} from "../../../base/participants";
+import { connect } from "../../../base/redux";
+import { updateSettings } from "../../../base/settings";
+import { Tooltip } from "../../../base/tooltip";
+import { getIndicatorsTooltipPosition } from "../../../filmstrip/functions.web";
+import { appendSuffix } from "../../functions";
 
 /**
  * The type of the React {@code Component} props of {@link DisplayName}.
  */
 type Props = {
-
     /**
      * The participant's current display name which should be shown when in
      * edit mode. Can be different from what is shown when not editing.
@@ -70,14 +69,13 @@ type Props = {
     /**
      * The type of thumbnail.
      */
-    thumbnailType: string
+    thumbnailType: string,
 };
 
 /**
  * The type of the React {@code Component} state of {@link DisplayName}.
  */
 type State = {
-
     /**
      * The current value of the display name in the edit field.
      */
@@ -86,30 +84,30 @@ type State = {
     /**
      * Whether or not the component should be displaying an editable input.
      */
-    isEditing: boolean
+    isEditing: boolean,
 };
-
-const styles = theme => {
+//0531 여기서 폰트 수정
+const styles = (theme) => {
     return {
         displayName: {
             ...theme.typography.labelBold,
             lineHeight: `${theme.typography.labelBold.lineHeight}px`,
             color: theme.palette.text01,
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap'
+            textOverflow: "ellipsis",
+            fontSize: "60px",
+            whiteSpace: "nowrap",
         },
 
         editDisplayName: {
-            outline: 'none',
-            border: 'none',
-            background: 'none',
-            boxShadow: 'none',
+            outline: "none",
+            border: "none",
+            background: "none",
+            boxShadow: "none",
             padding: 0,
             ...theme.typography.labelBold,
             lineHeight: `${theme.typography.labelBold.lineHeight}px`,
-            color: theme.palette.text01
-        }
+            color: theme.palette.text01,
+        },
     };
 };
 
@@ -122,7 +120,7 @@ class DisplayName extends Component<Props, State> {
     _nameInput: ?HTMLInputElement;
 
     static defaultProps = {
-        _configuredDisplayName: ''
+        _configuredDisplayName: "",
     };
 
     /**
@@ -135,8 +133,8 @@ class DisplayName extends Component<Props, State> {
         super(props);
 
         this.state = {
-            editDisplayNameValue: '',
-            isEditing: false
+            editDisplayNameValue: "",
+            isEditing: false,
         };
 
         /**
@@ -166,9 +164,11 @@ class DisplayName extends Component<Props, State> {
      * @returns {void}
      */
     componentDidUpdate(previousProps, previousState) {
-        if (!previousState.isEditing
-            && this.state.isEditing
-            && this._nameInput) {
+        if (
+            !previousState.isEditing &&
+            this.state.isEditing &&
+            this._nameInput
+        ) {
             this._nameInput.select();
         }
     }
@@ -187,36 +187,39 @@ class DisplayName extends Component<Props, State> {
             classes,
             elementID,
             t,
-            thumbnailType
+            thumbnailType,
         } = this.props;
 
         if (allowEditing && this.state.isEditing) {
             return (
                 <input
-                    autoFocus = { true }
-                    className = { classes.editDisplayName }
-                    id = 'editDisplayName'
-                    onBlur = { this._onSubmit }
-                    onChange = { this._onChange }
-                    onClick = { this._onClick }
-                    onKeyDown = { this._onKeyDown }
-                    placeholder = { t('defaultNickname') }
-                    ref = { this._setNameInputRef }
-                    spellCheck = { 'false' }
-                    type = 'text'
-                    value = { this.state.editDisplayNameValue } />
+                    autoFocus={true}
+                    className={classes.editDisplayName}
+                    id="editDisplayName"
+                    onBlur={this._onSubmit}
+                    onChange={this._onChange}
+                    onClick={this._onClick}
+                    onKeyDown={this._onKeyDown}
+                    placeholder={t("defaultNickname")}
+                    ref={this._setNameInputRef}
+                    spellCheck={"false"}
+                    type="text"
+                    value={this.state.editDisplayNameValue}
+                />
             );
         }
 
         return (
             <Tooltip
-                content = { appendSuffix(_nameToDisplay, displayNameSuffix) }
-                position = { getIndicatorsTooltipPosition(thumbnailType) }>
+                content={appendSuffix(_nameToDisplay, displayNameSuffix)}
+                position={getIndicatorsTooltipPosition(thumbnailType)}
+            >
                 <span
-                    className = { `displayname ${classes.displayName}` }
-                    id = { elementID }
-                    onClick = { this._onStartEditing }>
-                    { appendSuffix(_nameToDisplay, displayNameSuffix) }
+                    className={`displayname ${classes.displayName}`}
+                    id={elementID}
+                    onClick={this._onStartEditing}
+                >
+                    {appendSuffix(_nameToDisplay, displayNameSuffix)}
                 </span>
             </Tooltip>
         );
@@ -245,7 +248,7 @@ class DisplayName extends Component<Props, State> {
      */
     _onChange(event) {
         this.setState({
-            editDisplayNameValue: event.target.value
+            editDisplayNameValue: event.target.value,
         });
     }
 
@@ -259,7 +262,7 @@ class DisplayName extends Component<Props, State> {
      * @returns {void}
      */
     _onKeyDown(event) {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             this._onSubmit();
         }
     }
@@ -279,7 +282,7 @@ class DisplayName extends Component<Props, State> {
             e.stopPropagation();
             this.setState({
                 isEditing: true,
-                editDisplayNameValue: this.props._configuredDisplayName
+                editDisplayNameValue: this.props._configuredDisplayName,
             });
         }
     }
@@ -300,13 +303,15 @@ class DisplayName extends Component<Props, State> {
         const { dispatch } = this.props;
 
         // Store display name in settings
-        dispatch(updateSettings({
-            displayName: editDisplayNameValue
-        }));
+        dispatch(
+            updateSettings({
+                displayName: editDisplayNameValue,
+            })
+        );
 
         this.setState({
             isEditing: false,
-            editDisplayNameValue: ''
+            editDisplayNameValue: "",
         });
 
         this._nameInput = null;
@@ -345,8 +350,10 @@ function _mapStateToProps(state, ownProps) {
 
     return {
         _configuredDisplayName: participant && participant.name,
-        _nameToDisplay: getParticipantDisplayName(state, participantID)
+        _nameToDisplay: getParticipantDisplayName(state, participantID),
     };
 }
 
-export default translate(connect(_mapStateToProps)(withStyles(styles)(DisplayName)));
+export default translate(
+    connect(_mapStateToProps)(withStyles(styles)(DisplayName))
+);
