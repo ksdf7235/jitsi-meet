@@ -34,6 +34,7 @@ import type { AbstractProps } from "../AbstractConference";
 
 import ConferenceInfo from "./ConferenceInfo";
 import { default as Notice } from "./Notice";
+import Backbtn from "../../../../sungju/backbtn";
 
 declare var APP: Object;
 declare var interfaceConfig: Object;
@@ -164,16 +165,6 @@ class Conference extends AbstractConference<Props, *> {
         this._onFullScreenChange = this._onFullScreenChange.bind(this);
         this._onVidespaceTouchStart = this._onVidespaceTouchStart.bind(this);
         this._setBackground = this._setBackground.bind(this);
-        this._Back = () => {
-            const [ExitData] = useMutation(EXIT_QUERY);
-            ExitData({
-                variables: {
-                    participantNameKr: this.props.name,
-                },
-            });
-
-            history.back();
-        };
     }
 
     /**
@@ -238,15 +229,7 @@ class Conference extends AbstractConference<Props, *> {
             _showPrejoin,
             name,
         } = this.props;
-        function back() {
-            ExitData({
-                variables: {
-                    participantNameKr: this.props.name,
-                },
-            });
 
-            history.back();
-        }
         return (
             <div
                 id="layout_wrapper"
@@ -292,11 +275,7 @@ class Conference extends AbstractConference<Props, *> {
                     {_showPrejoin && <Prejoin />}
                     {_showLobby && <LobbyScreen />}
                 </div>
-                <div id="back_btn_layout">
-                    <div id="back_btn" onClick={this._Back}>
-                        <span>돌아가기</span>
-                    </div>
-                </div>
+                <Backbtn name={name} />
                 <ParticipantsPane />
             </div>
         );
@@ -345,10 +324,6 @@ class Conference extends AbstractConference<Props, *> {
      */
     _onVidespaceTouchStart() {
         this.props.dispatch(toggleToolboxVisible());
-    }
-
-    _Back() {
-        const [ExitData] = useMutation(EXIT_QUERY);
     }
 
     /**
