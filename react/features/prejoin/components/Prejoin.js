@@ -171,10 +171,8 @@ class Prejoin extends Component<Props, State> {
 
             return;
         }
-
         this.setState({ showError: false });
         this.props.joinConference();
-
         //prejoin 버튼 동작하는 곳(0527)
         const [data] = useMutation(ENTER_QUERY);
         data({
@@ -378,7 +376,6 @@ class Prejoin extends Component<Props, State> {
         }
         const hasExtraJoinButtons = Boolean(extraButtonsToRender.length);
         const { showJoinByPhoneButtons, showError } = this.state;
-
         return (
             <PreMeetingScreen
                 showDeviceStatus={deviceStatusVisible}

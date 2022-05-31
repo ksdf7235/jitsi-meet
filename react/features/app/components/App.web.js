@@ -2,7 +2,6 @@
 
 import { ApolloProvider } from "@apollo/client";
 import { AtlasKitThemeProvider } from "@atlaskit/theme";
-import { RecoilRoot } from "recoil";
 import React from "react";
 
 import { DialogContainer } from "../../base/dialog";
@@ -32,15 +31,13 @@ export class App extends AbstractApp {
     _createMainElement(component, props) {
         return (
             <ApolloProvider client={client}>
-                <RecoilRoot>
-                    <JitsiThemeProvider>
-                        <AtlasKitThemeProvider mode="dark">
-                            <GlobalStyles />
-                            <ChromeExtensionBanner />
-                            {super._createMainElement(component, props)}
-                        </AtlasKitThemeProvider>
-                    </JitsiThemeProvider>
-                </RecoilRoot>
+                <JitsiThemeProvider>
+                    <AtlasKitThemeProvider mode="dark">
+                        <GlobalStyles />
+                        <ChromeExtensionBanner />
+                        {super._createMainElement(component, props)}
+                    </AtlasKitThemeProvider>
+                </JitsiThemeProvider>
             </ApolloProvider>
         );
     }

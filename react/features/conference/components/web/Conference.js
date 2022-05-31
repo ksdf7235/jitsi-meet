@@ -1,7 +1,9 @@
 // @flow
 
+import { useMutation } from "@apollo/client";
 import _ from "lodash";
 import React from "react";
+import { EXIT_QUERY } from "../../../../sungju/mutation";
 
 import VideoLayout from "../../../../../modules/UI/videolayout/VideoLayout";
 import { getConferenceNameForTitle } from "../../../base/conference";
@@ -9,6 +11,7 @@ import { connect, disconnect } from "../../../base/connection";
 import { isMobileBrowser } from "../../../base/environment/utils";
 import { translate } from "../../../base/i18n";
 import { connect as reactReduxConnect } from "../../../base/redux";
+import { getDisplayName } from "../../../base/settings";
 import { setColorAlpha } from "../../../base/util";
 import { Chat } from "../../../chat";
 import { MainFilmstrip, StageFilmstrip } from "../../../filmstrip";
@@ -102,6 +105,8 @@ type Props = AbstractProps & {
      */
     _showPrejoin: boolean,
 
+    name: string,
+
     dispatch: Function,
     t: Function,
 };
@@ -119,6 +124,7 @@ class Conference extends AbstractConference<Props, *> {
     _originalOnMouseMove: Function;
     _originalOnShowToolbar: Function;
     _setBackground: Function;
+    _Back: Function;
 
     /**
      * Initializes a new Conference instance.
@@ -158,6 +164,16 @@ class Conference extends AbstractConference<Props, *> {
         this._onFullScreenChange = this._onFullScreenChange.bind(this);
         this._onVidespaceTouchStart = this._onVidespaceTouchStart.bind(this);
         this._setBackground = this._setBackground.bind(this);
+        this._Back = () => {
+            const [ExitData] = useMutation(EXIT_QUERY);
+            ExitData({
+                variables: {
+                    participantNameKr: this.props.name,
+                },
+            });
+
+            history.back();
+        };
     }
 
     /**
@@ -220,10 +236,17 @@ class Conference extends AbstractConference<Props, *> {
             _overflowDrawer,
             _showLobby,
             _showPrejoin,
+            name,
         } = this.props;
-        const back = () => {
+        function back() {
+            ExitData({
+                variables: {
+                    participantNameKr: this.props.name,
+                },
+            });
+
             history.back();
-        };
+        }
         return (
             <div
                 id="layout_wrapper"
@@ -270,7 +293,7 @@ class Conference extends AbstractConference<Props, *> {
                     {_showLobby && <LobbyScreen />}
                 </div>
                 <div id="back_btn_layout">
-                    <div id="back_btn" onClick={back}>
+                    <div id="back_btn" onClick={this._Back}>
                         <span>돌아가기</span>
                     </div>
                 </div>
@@ -322,6 +345,10 @@ class Conference extends AbstractConference<Props, *> {
      */
     _onVidespaceTouchStart() {
         this.props.dispatch(toggleToolboxVisible());
+    }
+
+    _Back() {
+        const [ExitData] = useMutation(EXIT_QUERY);
     }
 
     /**
@@ -415,6 +442,7 @@ function _mapStateToProps(state) {
     const { backgroundAlpha, mouseMoveCallbackInterval } =
         state["features/base/config"];
     const { overflowDrawer } = state["features/toolbox"];
+    const name = getDisplayName(state);
 
     return {
         ...abstractMapStateToProps(state),
@@ -425,6 +453,7 @@ function _mapStateToProps(state) {
         _roomName: getConferenceNameForTitle(state),
         _showLobby: getIsLobbyVisible(state),
         _showPrejoin: isPrejoinPageVisible(state),
+        name,
     };
 }
 

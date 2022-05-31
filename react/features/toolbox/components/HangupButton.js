@@ -1,7 +1,9 @@
 // @flow
 
+import { useMutation } from "@apollo/client";
 import _ from "lodash";
 
+import { EXIT_QUERY } from "../../../sungju/mutation";
 import { createToolbarEvent, sendAnalytics } from "../../analytics";
 import { appNavigate } from "../../app/actions";
 
@@ -20,6 +22,7 @@ type Props = AbstractButtonProps & {
      * The redux {@code dispatch} function.
      */
     dispatch: Function,
+    name: string,
 };
 
 /**
@@ -63,6 +66,12 @@ class HangupButton extends AbstractHangupButton<Props, *> {
      */
     _doHangup() {
         this._hangup();
+        const [data] = useMutation(EXIT_QUERY);
+        data({
+            variables: {
+                participantNameKr: this.props.name,
+            },
+        });
     }
 }
 
