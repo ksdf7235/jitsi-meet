@@ -50,7 +50,7 @@ const useStyles = makeStyles(() => {
 
             "&>div": {
                 display: "flex",
-                fontSize: "60px",
+                fontSize: "60px !important",
             },
 
             "&:first-child": {

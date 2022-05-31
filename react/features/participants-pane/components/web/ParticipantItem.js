@@ -1,24 +1,23 @@
 // @flow
 
-import { makeStyles } from '@material-ui/styles';
-import React, { type Node, useCallback } from 'react';
+import { makeStyles } from "@material-ui/styles";
+import React, { type Node, useCallback } from "react";
 
-import { Avatar } from '../../../base/avatar';
-import { ListItem } from '../../../base/components';
-import { translate } from '../../../base/i18n';
+import { Avatar } from "../../../base/avatar";
+import { ListItem } from "../../../base/components";
+import { translate } from "../../../base/i18n";
 import {
     ACTION_TRIGGER,
     AudioStateIcons,
     MEDIA_STATE,
     type ActionTrigger,
     type MediaState,
-    VideoStateIcons
-} from '../../constants';
+    VideoStateIcons,
+} from "../../constants";
 
-import { RaisedHandIndicator } from './RaisedHandIndicator';
+import { RaisedHandIndicator } from "./RaisedHandIndicator";
 
 type Props = {
-
     /**
      * Type of trigger for the participant actions.
      */
@@ -97,28 +96,27 @@ type Props = {
     /**
      * The translated "you" text.
      */
-    youText?: string
-}
+    youText?: string,
+};
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => {
     return {
         nameContainer: {
-            display: 'flex',
+            display: "flex",
             flex: 1,
-            overflow: 'hidden'
+            overflow: "hidden",
         },
 
         name: {
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap'
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
         },
 
         moderatorLabel: {
             ...theme.typography.labelRegular,
             lineHeight: `${theme.typography.labelRegular.lineHeight}px`,
-            color: theme.palette.text03
-        }
+            color: theme.palette.text03,
+        },
     };
 });
 
@@ -144,35 +142,39 @@ function ParticipantItem({
     raisedHand,
     t,
     videoMediaState = MEDIA_STATE.NONE,
-    youText
+    youText,
 }: Props) {
     const onClick = useCallback(
-        () => openDrawerForParticipant && openDrawerForParticipant({
-            participantID,
-            displayName
-        }));
+        () =>
+            openDrawerForParticipant &&
+            openDrawerForParticipant({
+                participantID,
+                displayName,
+            })
+    );
 
     const styles = useStyles();
 
     const icon = (
         <Avatar
-            className = 'participant-avatar'
-            displayName = { displayName }
-            participantId = { participantID }
-            size = { 32 } />
+            className="participant-avatar"
+            displayName={displayName}
+            participantId={participantID}
+            size={32}
+        />
     );
 
     const text = (
         <>
-            <div className = { styles.nameContainer }>
-                <div className = { styles.name }>
-                    {displayName}
-                </div>
+            <div className={styles.nameContainer}>
+                <div className={styles.name}>{displayName}</div>
                 {local ? <span>&nbsp;({youText})</span> : null}
             </div>
-            {isModerator && !disableModeratorIndicator && <div className = { styles.moderatorLabel }>
-                {t('videothumbnail.moderator')}
-            </div>}
+            {isModerator && !disableModeratorIndicator && (
+                <div className={styles.moderatorLabel}>
+                    {t("videothumbnail.moderator")}
+                </div>
+            )}
         </>
     );
 
@@ -186,16 +188,17 @@ function ParticipantItem({
 
     return (
         <ListItem
-            actions = { children }
-            hideActions = { local }
-            icon = { icon }
-            id = { `participant-item-${participantID}` }
-            indicators = { indicators }
-            isHighlighted = { isHighlighted }
-            onClick = { !local && overflowDrawer ? onClick : undefined }
-            onMouseLeave = { onLeave }
-            textChildren = { text }
-            trigger = { actionsTrigger } />
+            actions={children}
+            hideActions={local}
+            icon={icon}
+            id={`participant-item-${participantID}`}
+            indicators={indicators}
+            isHighlighted={isHighlighted}
+            onClick={!local && overflowDrawer ? onClick : undefined}
+            onMouseLeave={onLeave}
+            textChildren={text}
+            trigger={actionsTrigger}
+        />
     );
 }
 
