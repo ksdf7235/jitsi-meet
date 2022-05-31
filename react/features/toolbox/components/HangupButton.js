@@ -11,6 +11,8 @@ import { connect } from "../../base/redux";
 
 import { AbstractHangupButton } from "../../base/toolbox/components";
 import type { AbstractButtonProps } from "../../base/toolbox/components";
+import { useMutation } from "@apollo/client";
+import { EXIT_QUERY } from "../../../sungju/mutation";
 
 /**
  * The type of the React {@code Component} props of {@link HangupButton}.
@@ -30,6 +32,7 @@ type Props = AbstractButtonProps & {
  */
 class HangupButton extends AbstractHangupButton<Props, *> {
     _hangup: Function;
+    _onClick: Function;
 
     accessibilityLabel = "toolbar.accessibilityLabel.hangup";
     label = "toolbar.hangup";
@@ -45,7 +48,6 @@ class HangupButton extends AbstractHangupButton<Props, *> {
         super(props);
         this._hangup = _.once(() => {
             sendAnalytics(createToolbarEvent("hangup"));
-
             // FIXME: these should be unified.
             if (navigator.product === "ReactNative") {
                 this.props.dispatch(appNavigate(undefined));

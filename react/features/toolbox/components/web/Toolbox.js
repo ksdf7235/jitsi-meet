@@ -112,6 +112,7 @@ import Separator from "./Separator";
 import ShareDesktopButton from "./ShareDesktopButton";
 import ToggleCameraButton from "./ToggleCameraButton";
 import VideoSettingsButton from "./VideoSettingsButton";
+import Exitbtn from "../../../../sungju/toolExitbtn";
 
 /**
  * The type of the React {@code Component} props of {@link Toolbox}.
@@ -1476,18 +1477,19 @@ class Toolbox extends Component<Props> {
                                 </ContextMenu>
                             </OverflowMenuButton>
                         )}
-
-                        <HangupButton
-                            name={name}
-                            buttonKey="hangup"
-                            customClass="hangup-button"
-                            key="hangup-button"
-                            notifyMode={this._getButtonNotifyMode("hangup")}
-                            visible={isToolbarButtonEnabled(
-                                "hangup",
-                                _toolbarButtons
-                            )}
-                        />
+                        <Exitbtn>
+                            <HangupButton
+                                name={name}
+                                buttonKey="hangup"
+                                customClass="hangup-button"
+                                key="hangup-button"
+                                notifyMode={this._getButtonNotifyMode("hangup")}
+                                visible={isToolbarButtonEnabled(
+                                    "hangup",
+                                    _toolbarButtons
+                                )}
+                            />
+                        </Exitbtn>
                     </div>
                 </div>
             </div>

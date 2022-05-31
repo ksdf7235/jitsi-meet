@@ -6,14 +6,14 @@
  *
  */
 export const commonClassName = {
-    emptyList: 'empty-list',
-    muteDialog: 'mute-dialog',
-    overflowMenuItem: 'overflow-menu-item',
-    overflowMenuItemIcon: 'overflow-menu-item-icon',
-    participantAvatar: 'participant-avatar',
-    toolboxIcon: 'toolbox-icon',
-    toolboxButton: 'toolbox-button',
-    toolboxContentItems: 'toolbox-content-items'
+    emptyList: "empty-list",
+    muteDialog: "mute-dialog",
+    overflowMenuItem: "overflow-menu-item",
+    overflowMenuItemIcon: "overflow-menu-item-icon",
+    participantAvatar: "participant-avatar",
+    toolboxIcon: "toolbox-icon",
+    toolboxButton: "toolbox-button",
+    toolboxContentItems: "toolbox-content-items",
 };
 
 /**
@@ -27,155 +27,160 @@ export const commonStyles = (theme: Object) => {
     return {
         // '.empty-list'
         [commonClassName.emptyList]: {
-            listStyleType: 'none',
+            listStyleType: "none",
             margin: 0,
-            padding: 0
+            padding: 0,
         },
         [commonClassName.muteDialog]: {
-            '& .separator-line': {
+            "& .separator-line": {
                 margin: `${theme.spacing(4)}px 0 ${theme.spacing(4)}px -20px`,
-                padding: '0 20px',
-                width: '100%',
-                height: '1px',
-                background: '#5E6D7A'
+                padding: "0 20px",
+                width: "100%",
+                height: "1px",
+                background: "#5E6D7A",
             },
 
-            '& .control-row': {
-                display: 'flex',
-                justifyContent: 'space-between',
+            "& .control-row": {
+                display: "flex",
+                justifyContent: "space-between",
                 marginTop: `${theme.spacing(3)}px`,
 
-                '& label': {
-                    fontSize: '14px'
-                }
-            }
+                "& label": {
+                    fontSize: "14px",
+                },
+            },
         },
         [commonClassName.overflowMenuItem]: {
-            alignItems: 'center',
+            alignItems: "center",
             color: theme.palette.text01,
-            cursor: 'pointer',
-            display: 'flex',
+            cursor: "pointer",
+            display: "flex",
             fontSize: 14,
             fontWeight: 400,
             height: 40,
-            lineHeight: '24px',
-            padding: '8px 16px',
-            boxSizing: 'border-box',
-            '& > div': {
-                display: 'flex',
-                alignItems: 'center'
+            lineHeight: "24px",
+            padding: "8px 16px",
+            boxSizing: "border-box",
+            "& > div": {
+                display: "flex",
+                alignItems: "center",
             },
 
-            '&.unclickable': {
-                cursor: 'default'
+            "&.unclickable": {
+                cursor: "default",
             },
 
-            '&.disabled': {
-                cursor: 'initial',
+            "&.disabled": {
+                cursor: "initial",
                 color: theme.palette.text03,
 
-                '&:hover': {
-                    background: 'none'
+                "&:hover": {
+                    background: "none",
                 },
 
-                '& svg': {
-                    fill: theme.palette.text03
-                }
+                "& svg": {
+                    fill: theme.palette.text03,
+                },
             },
 
-            '@media (hover: hover) and (pointer: fine)': {
-                '&:hover': {
-                    background: theme.palette.action02Hover
+            "@media (hover: hover) and (pointer: fine)": {
+                "&:hover": {
+                    background: theme.palette.action02Hover,
                 },
-                '&.unclickable:hover': {
-                    background: 'inherit'
-                }
-            }
+                "&.unclickable:hover": {
+                    background: "inherit",
+                },
+            },
         },
         [commonClassName.overflowMenuItemIcon]: {
-            marginRight: '16px',
+            marginRight: "16px",
 
-            '& i': {
-                display: 'inline',
-                fontSize: 24
+            "& i": {
+                display: "inline",
+                fontSize: 24,
             },
 
-            '@media (hover: hover) and (pointer: fine)': {
-                '&i:hover': {
-                    backgroundColor: 'initial'
-                }
+            "@media (hover: hover) and (pointer: fine)": {
+                "&i:hover": {
+                    backgroundColor: "initial",
+                },
             },
 
-            '& img': {
+            "& img": {
                 maxWidth: 24,
-                maxHeight: 24
+                maxHeight: 24,
             },
 
-            '& svg': {
+            "& svg": {
                 fill: theme.palette.text01,
                 height: 20,
-                width: 20
-            }
+                width: 20,
+            },
         },
         [commonClassName.participantAvatar]: {
-            margin: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(2)}px 0`
+            margin: `${theme.spacing(2)}px ${theme.spacing(
+                3
+            )}px ${theme.spacing(2)}px 0`,
         },
         [commonClassName.toolboxIcon]: {
-            display: 'flex',
+            display: "flex",
             borderRadius: 3,
-            flexDirection: 'column',
+            flexDirection: "column",
             fontSize: 24,
             height: 48,
-            justifyContent: 'center',
+            justifyContent: "center",
             width: 48,
 
-            '@media (hover: hover) and (pointer: fine)': {
-                '&:hover': {
-                    background: theme.palette.action02Hover
-                }
+            "@media (hover: hover) and (pointer: fine)": {
+                "&:hover": {
+                    background: theme.palette.action02Hover,
+                },
             },
-            [theme.breakpoints.down('320')]: {
+            [theme.breakpoints.down("320")]: {
                 height: 36,
-                width: 36
+                width: 36,
             },
 
-            '&.toggled': {
-                background: theme.palette.ui02
+            "&.toggled": {
+                background: theme.palette.ui02,
             },
 
-            '&.disabled': {
-                cursor: 'initial !important',
+            "&.disabled": {
+                cursor: "initial !important",
                 backgroundColor: `${theme.palette.action02Disabled} !important`,
 
-                '& svg': {
-                    fill: `${theme.palette.text03} !important`
-                }
-            }
+                "& svg": {
+                    fill: `${theme.palette.text03} !important`,
+                },
+            },
         },
         [commonClassName.toolboxButton]: {
             color: theme.palette.text01,
-            cursor: 'pointer',
-            display: 'inline-block',
-            lineHeight: '48px',
-            textAlign: 'center'
+            cursor: "pointer",
+            display: "inline-block",
+            lineHeight: "48px",
+            textAlign: "center",
         },
+        //0531 툴바 css
         [commonClassName.toolboxContentItems]: {
+            display: "flex",
             background: theme.palette.ui01,
             borderRadius: 6,
-            margin: '0 auto',
+            margin: "0 auto",
             padding: 6,
-            textAlign: 'center',
-            pointerEvents: 'all',
-            boxShadow: '0px 2px 8px 4px rgba(0, 0, 0, 0.25), 0px 0px 0px 1px rgba(0, 0, 0, 0.15)',
+            textAlign: "center",
+            pointerEvents: "all",
+            boxShadow:
+                "0px 2px 8px 4px rgba(0, 0, 0, 0.25), 0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
 
-            '& > div': {
+            "& > div": {
                 marginLeft: 8,
 
-                '&:first-child': {
-                    marginLeft: 0
-                }
-            }
-        }
+                "&:first-child": {
+                    marginLeft: 0,
+                },
+            },
+        },
     };
 };
 
@@ -188,12 +193,12 @@ export const commonStyles = (theme: Object) => {
 export const getGlobalStyles = (theme: Object) => {
     return {
         // @atlaskit/modal-dialog OVERRIDES
-        '.atlaskit-portal div[role=dialog]': {
+        ".atlaskit-portal div[role=dialog]": {
             // override dialog background
-            '& > div': {
+            "& > div": {
                 background: theme.palette.ui02,
-                color: theme.palette.text01
-            }
-        }
+                color: theme.palette.text01,
+            },
+        },
     };
 };
