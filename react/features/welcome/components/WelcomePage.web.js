@@ -133,7 +133,8 @@ class WelcomePage extends AbstractWelcomePage {
         super.componentDidMount();
 
         document.body.classList.add("welcome-page");
-        document.title = interfaceConfig.APP_NAME;
+        //0531 타이틀 변경
+        document.title = "Sungju Meet";
 
         if (this.state.generateRoomnames) {
             this._updateRoomname();

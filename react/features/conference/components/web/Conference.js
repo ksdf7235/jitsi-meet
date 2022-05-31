@@ -172,8 +172,9 @@ class Conference extends AbstractConference<Props, *> {
      *
      * @inheritdoc
      */
+    //0531 타이틀 변경
     componentDidMount() {
-        document.title = `${this.props._roomName} | ${interfaceConfig.APP_NAME}`;
+        document.title = `${this.props._roomName} | Sungju Meet`;
         this._start();
     }
 
