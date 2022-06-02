@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const EXAMPLE_QUERY = gql`
     query ExampleQuery {
@@ -33,8 +33,16 @@ export const EXAMPLE_MUTATION = gql`
 `;
 
 export const ENTER_QUERY = gql`
-    mutation EnterMutation($participantNameKr: String!) {
-        EnterTime(participantNameKr: $participantNameKr) {
+    mutation EnterMutation(
+        $participantNameKr: String!,
+        $hostNameEng: String,
+        $hostNameKr: String
+    ) {
+        EnterTime(
+            participantNameKr: $participantNameKr,
+            hostNameEng: $hostNameEng,
+            hostNameKr: $hostNameKr
+        ) {
             ok
         }
     }

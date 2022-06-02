@@ -37,6 +37,8 @@ import DropdownButton from "./DropdownButton";
 import JoinByPhoneDialog from "./dialogs/JoinByPhoneDialog";
 import { useMutation } from "@apollo/client";
 import { ENTER_QUERY } from "../../../sungju/mutation";
+import { dummy } from "../../../sungju/dummy";
+import PreJoinBtn from "../../../sungju/prejoinBtn";
 
 type Props = {
     /**
@@ -173,13 +175,7 @@ class Prejoin extends Component<Props, State> {
         }
         this.setState({ showError: false });
         this.props.joinConference();
-        //prejoin 버튼 동작하는 곳(0527)
-        const [data] = useMutation(ENTER_QUERY);
-        data({
-            variables: {
-                participantNameKr: this.props.name,
-            },
-        });
+       //0527 prjoin 동작하는 곳
     }
 
     _onJoinKeyPress: (Object) => void;
@@ -427,6 +423,7 @@ class Prejoin extends Component<Props, State> {
                             isOpen={showJoinByPhoneButtons}
                             onClose={_onDropdownClose}
                         >
+                            <PreJoinBtn>
                             <ActionButton
                                 OptionsIcon={
                                     showJoinByPhoneButtons
@@ -445,10 +442,13 @@ class Prejoin extends Component<Props, State> {
                                 role="button"
                                 tabIndex={0}
                                 testId="prejoin.joinMeeting"
-                                type="primary"
+                                    type="primary"
+                                    roomName={this.props.roomName}
+                                    name={this.props.name}
                             >
                                 {t("prejoin.joinMeeting")}
                             </ActionButton>
+                                </PreJoinBtn>
                         </InlineDialog>
                     </div>
                 </div>

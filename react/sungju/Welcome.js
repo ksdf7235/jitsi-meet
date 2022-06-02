@@ -1,22 +1,7 @@
-import { useMutation } from "@apollo/client";
 import React from "react";
 import { dummy } from "./dummy";
-import { ENTER_QUERY } from "./mutation";
 
 function Welcome() {
-    const testname = "경산1리";
-
-    const [data] = useMutation(ENTER_QUERY);
-
-    const test = (item) => {
-        console.log("test");
-        const value = data({
-            variables: {
-                participantNameKr: testname,
-            },
-        });
-    };
-
     return (
         <div id="sungju" className="sungju">
             <div id="sungju_header">
@@ -32,14 +17,14 @@ function Welcome() {
                 {dummy.map((item, i) => (
                     <div id="Enter_Block" key={i} onClick={() => test(item)}>
                         <div id="number">
-                            <span>{item.id}</span>
+                            <span>{i + 1}</span>
                         </div>
                         <div id="title">
-                            <span>{item.hostNameKr}</span>
+                            <span>{item.roomNamekr}</span>
                         </div>
                         <div id="btn">
                             <img id="btn_img" src="/images/video.svg"></img>
-                            <a href={`/${item.hostNameEng}`}>
+                            <a href={`/${item.roomNameEng}`}>
                                 <span>입장하기</span>
                             </a>
                         </div>
