@@ -192,7 +192,7 @@ class WelcomePage extends AbstractWelcomePage {
             ? "with-footer"
             : "without-footer";
 
-        return <Welcome />;
+        return <Welcome name={this.props._settings.displayName} />;
     }
     /**
      * Renders the insecure room name warning.
