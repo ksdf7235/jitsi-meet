@@ -152,7 +152,7 @@ class Watermarks extends Component<Props, State> {
 
         if (_showJitsiWatermark) {
             const style = {
-                backgroundImage: `url(images/sungjumark.png)`,
+                backgroundImage: `url(images/seongjumark.png)`,
                 maxWidth: 140,
                 maxHeight: 140,
                 position: _logoLink ? "static" : "absolute",

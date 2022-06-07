@@ -9,7 +9,7 @@
  */
 
 var interfaceConfig = {
-    APP_NAME: "Sungju Meet",
+    APP_NAME: "Seongju Meet",
     AUDIO_LEVEL_PRIMARY_COLOR: "rgba(255,255,255,0.4)",
     AUDIO_LEVEL_SECONDARY_COLOR: "rgba(255,255,255,0.2)",
 
@@ -27,8 +27,8 @@ var interfaceConfig = {
     CLOSE_PAGE_GUEST_HINT: false, // A html text to be shown to guests on the close page, false disables it
 
     DEFAULT_BACKGROUND: "#040404",
-    DEFAULT_LOGO_URL: "images/sungjumark.png",
-    DEFAULT_WELCOME_PAGE_LOGO_URL: "images/sungjumark.png",
+    DEFAULT_LOGO_URL: "images/seongjumark.png",
+    DEFAULT_WELCOME_PAGE_LOGO_URL: "images/seongjumark.png",
 
     DISABLE_DOMINANT_SPEAKER_INDICATOR: false,
 
@@ -128,7 +128,7 @@ var interfaceConfig = {
     MOBILE_DOWNLOAD_LINK_IOS:
         "https://itunes.apple.com/us/app/jitsi-meet/id1165103905",
 
-    NATIVE_APP_NAME: "Sungju Meet",
+    NATIVE_APP_NAME: "Seongju Meet",
 
     // Names of browsers which should show a warning stating the current browser
     // has a suboptimal experience. Browsers which are not listed as optimal or
