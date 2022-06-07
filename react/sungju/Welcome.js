@@ -29,13 +29,7 @@ function Welcome(props) {
             </div>
             <div id="Enter_Block_Layout">
                 {dummy.map((item, i) => (
-                    <div
-                        id="Enter_Block"
-                        key={i}
-                        onClick={() =>
-                            onClick(item.roomNamekr, item.roomNameEng)
-                        }
-                    >
+                    <div id="Enter_Block" key={i}>
                         <div id="number">
                             <span>{i + 1}</span>
                         </div>
@@ -44,7 +38,12 @@ function Welcome(props) {
                         </div>
                         <div id="btn">
                             <img id="btn_img" src="/images/video.svg"></img>
-                            <a href={`/${item.roomNameEng}`}>
+                            <a
+                                href={`/${item.roomNameEng}`}
+                                onClick={() =>
+                                    onClick(item.roomNamekr, item.roomNameEng)
+                                }
+                            >
                                 <span>입장하기</span>
                             </a>
                         </div>
