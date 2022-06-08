@@ -17,14 +17,14 @@ function Welcome(props) {
         });
     };
     return (
-        <div id="sungju" className="sungju">
-            <div id="sungju_header">
-                <div id="sungju_upper_header">
+        <div id="seongju" className="seongju">
+            <div id="seongju_header">
+                <div id="seongju_upper_header">
                     성주군청 마을회관 회의방 목록
                 </div>
-                <div id="sungju_bottom_header">
+                <div id="seongju_bottom_header">
                     <div>입장하실 회의방의 접속 버튼을 눌러 접속하세요!</div>
-                    <div id="sungju_bottom_header_icon"></div>
+                    <div id="seongju_bottom_header_icon"></div>
                 </div>
             </div>
             <div id="Enter_Block_Layout">

@@ -7,7 +7,7 @@ body.welcome-page {
     width: 30px;
     height: 30px;
 }
-.sungju {
+.seongju {
     width: 100%;
     min-height: 100vh;
     background-color: #f0f1f3;
@@ -21,7 +21,7 @@ body.welcome-page {
     a:visited {
         color: white;
     }
-    #sungju_header {
+    #seongju_header {
         width: 100%;
         height: 8vh;
         position: fixed;
@@ -34,14 +34,14 @@ body.welcome-page {
         border-bottom: 1px solid black;
         color: #000000;
 
-        #sungju_upper_header {
+        #seongju_upper_header {
             font-size: 2rem;
         }
-        #sungju_bottom_header {
+        #seongju_bottom_header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            #sungju_bottom_header_icon {
+            #seongju_bottom_header_icon {
                 display: flex;
                 align-items: flex-start;
                 justify-content: flex-start;

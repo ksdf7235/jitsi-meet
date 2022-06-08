@@ -3,7 +3,7 @@
 import { useMutation } from "@apollo/client";
 import _ from "lodash";
 import React from "react";
-import { EXIT_QUERY } from "../../../../sungju/mutation";
+import { EXIT_QUERY } from "../../../../seongju/mutation";
 
 import VideoLayout from "../../../../../modules/UI/videolayout/VideoLayout";
 import { getConferenceNameForTitle } from "../../../base/conference";
@@ -34,7 +34,7 @@ import type { AbstractProps } from "../AbstractConference";
 
 import ConferenceInfo from "./ConferenceInfo";
 import { default as Notice } from "./Notice";
-import Backbtn from "../../../../sungju/backbtn";
+import Backbtn from "../../../../seongju/backbtn";
 
 declare var APP: Object;
 declare var interfaceConfig: Object;
@@ -174,7 +174,7 @@ class Conference extends AbstractConference<Props, *> {
      */
     //0531 타이틀 변경
     componentDidMount() {
-        document.title = `${this.props._roomName} | Sungju Meet`;
+        document.title = `${this.props._roomName} | Seongju Meet`;
         this._start();
     }
 

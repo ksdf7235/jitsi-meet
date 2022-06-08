@@ -12,7 +12,7 @@ import { connect } from "../../base/redux";
 import { AbstractHangupButton } from "../../base/toolbox/components";
 import type { AbstractButtonProps } from "../../base/toolbox/components";
 import { useMutation } from "@apollo/client";
-import { EXIT_QUERY } from "../../../sungju/mutation";
+import { EXIT_QUERY } from "../../../seongju/mutation";
 
 /**
  * The type of the React {@code Component} props of {@link HangupButton}.

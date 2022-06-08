@@ -1,15 +1,15 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const EXAMPLE_QUERY = gql`
     query ExampleQuery {
-        sungjues {
+        seongjues {
             id
         }
     }
 `;
 export const FIND_QUERY = gql`
     query ExampleQuery($participantNameKr: String!) {
-        sungju(participantNameKr: $participantNameKr) {
+        seongju(participantNameKr: $participantNameKr) {
             id
         }
     }
@@ -21,7 +21,7 @@ export const EXAMPLE_MUTATION = gql`
         $participantNameEng: String!
         $participantNameKr: String!
     ) {
-        createSungju(
+        createseongju(
             hostNameEng: $hostNameEng
             hostNameKr: $hostNameKr
             participantNameEng: $participantNameEng
@@ -34,13 +34,13 @@ export const EXAMPLE_MUTATION = gql`
 
 export const ENTER_QUERY = gql`
     mutation EnterMutation(
-        $participantNameKr: String!,
-        $hostNameEng: String,
+        $participantNameKr: String!
+        $hostNameEng: String
         $hostNameKr: String
     ) {
         EnterTime(
-            participantNameKr: $participantNameKr,
-            hostNameEng: $hostNameEng,
+            participantNameKr: $participantNameKr
+            hostNameEng: $hostNameEng
             hostNameKr: $hostNameKr
         ) {
             ok

@@ -14,7 +14,7 @@ import { SettingsButton, SETTINGS_TABS } from "../../settings";
 
 import { AbstractWelcomePage, _mapStateToProps } from "./AbstractWelcomePage";
 import Tabs from "./Tabs";
-import Welcome from "../../../sungju/Welcome";
+import Welcome from "../../../seongju/Welcome";
 
 /**
  * The pattern used to validate room name.
@@ -134,7 +134,7 @@ class WelcomePage extends AbstractWelcomePage {
 
         document.body.classList.add("welcome-page");
         //0531 타이틀 변경
-        document.title = "Sungju Meet";
+        document.title = "Seongju Meet";
 
         if (this.state.generateRoomnames) {
             this._updateRoomname();

@@ -6,7 +6,7 @@ import { batch } from "react-redux";
 
 import { useMutation } from "@apollo/client";
 import keyboardShortcut from "../../../../../modules/keyboardshortcut/keyboardshortcut";
-import { EXIT_QUERY } from "../../../../sungju/mutation";
+import { EXIT_QUERY } from "../../../../seongju/mutation";
 import {
     ACTION_SHORTCUT_TRIGGERED,
     createShortcutEvent,
@@ -112,7 +112,7 @@ import Separator from "./Separator";
 import ShareDesktopButton from "./ShareDesktopButton";
 import ToggleCameraButton from "./ToggleCameraButton";
 import VideoSettingsButton from "./VideoSettingsButton";
-import Exitbtn from "../../../../sungju/toolExitbtn";
+import Exitbtn from "../../../../seongju/toolExitbtn";
 
 /**
  * The type of the React {@code Component} props of {@link Toolbox}.
