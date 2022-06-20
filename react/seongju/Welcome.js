@@ -36,14 +36,14 @@ function Welcome(props) {
                         <div id="title">
                             <span>{item.roomNamekr}</span>
                         </div>
-                        <div id="btn">
-                            <img id="btn_img" src="/images/video.svg"></img>
-                            <a
-                                href={`/${item.roomNameEng}`}
-                                onClick={() =>
-                                    onClick(item.roomNamekr, item.roomNameEng)
-                                }
-                            >
+                        <div
+                            id="btn"
+                            onClick={() =>
+                                onClick(item.roomNamekr, item.roomNameEng)
+                            }
+                        >
+                            <a href={`${item.roomNameEng}`}>
+                                <img id="btn_img" src="/images/video.svg"></img>
                                 <span>입장하기</span>
                             </a>
                         </div>
