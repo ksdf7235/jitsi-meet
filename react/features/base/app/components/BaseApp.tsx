@@ -18,10 +18,10 @@ import { createDeferred } from "../../util/helpers";
 import { appWillMount, appWillUnmount } from "../actions";
 import logger from "../logger";
 import { RecoilRoot } from "recoil";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import WelcomePageMain from "../../../../nxdf/components/welcome/WelcomePageMain";
-import { Switch } from "react-native";
-import WelcomePageWeb from "../../../welcome/components/WelcomePage.web";
+import ProfilePage from "../../../../nxdf/components/profile/ProfilePage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 /**
  * The type of the React {@code Component} state of {@link BaseApp}.
@@ -164,6 +164,7 @@ export default class BaseApp<P> extends Component<P, IState> {
      * @returns {ReactElement}
      */
     render() {
+        const client = new QueryClient();
         const {
             route: { component, props },
             store,
@@ -172,33 +173,45 @@ export default class BaseApp<P> extends Component<P, IState> {
         if (store) {
             return (
                 <RecoilRoot>
-                    <I18nextProvider i18n={i18next}>
-                        {/* @ts-ignore */}
-                        <Provider store={store}>
-                            <BrowserRouter>
-                                <Fragment>
-                                    {this._createMainElement(component, props)}
-                                    <SoundCollection />
-                                    {this._createExtraElement()}
-                                    {/* <Route
+                    <QueryClientProvider client={client}>
+                        <I18nextProvider i18n={i18next}>
+                            {/* @ts-ignore */}
+                            <Provider store={store}>
+                                <BrowserRouter>
+                                    <Fragment>
+                                        {this._createMainElement(
+                                            component,
+                                            props
+                                        )}
+                                        <SoundCollection />
+                                        {this._createExtraElement()}
+                                        {/* <Route
                                         exact={true}
                                         path="/"
                                         render={(props) => (
                                             <WelcomePageWeb {...props} />
                                         )}
                                     /> */}
-                                    <Route
-                                        exact={true}
-                                        path="/"
-                                        render={(props) => (
-                                            <WelcomePageMain {...props} />
-                                        )}
-                                    />
-                                </Fragment>
-                            </BrowserRouter>
-                            {this._renderDialogContainer()}
-                        </Provider>
-                    </I18nextProvider>
+                                        <Route
+                                            exact={true}
+                                            path="/"
+                                            render={(props) => (
+                                                <WelcomePageMain {...props} />
+                                            )}
+                                        />
+                                        <Route
+                                            exact={true}
+                                            path="/profile"
+                                            render={(props) => (
+                                                <ProfilePage {...props} />
+                                            )}
+                                        />
+                                    </Fragment>
+                                </BrowserRouter>
+                                {this._renderDialogContainer()}
+                            </Provider>
+                        </I18nextProvider>
+                    </QueryClientProvider>
                 </RecoilRoot>
             );
         }

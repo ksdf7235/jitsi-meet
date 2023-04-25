@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { IReduxState } from '../../../app/types';
-import Avatar from '../../../base/avatar/components/Avatar';
-import { getLocalParticipant } from '../../../base/participants/functions';
-import { ILocalParticipant } from '../../../base/participants/types';
+import { IReduxState } from "../../../app/types";
+import Avatar from "../../../base/avatar/components/Avatar";
+import { getLocalParticipant } from "../../../base/participants/functions";
+import { ILocalParticipant } from "../../../base/participants/types";
 
 /**
  * The type of the React {@code Component} props of
  * {@link ProfileButtonAvatar}.
  */
 interface IProps {
-
     /**
      * The redux representation of the local participant.
      */
     _localParticipant?: ILocalParticipant;
-
 }
 
 /**
@@ -35,11 +33,7 @@ class ProfileButtonAvatar extends Component<IProps> {
     render() {
         const { _localParticipant } = this.props;
 
-        return (
-            <Avatar
-                participantId = { _localParticipant?.id }
-                size = { 20 } />
-        );
+        return <Avatar participantId={_localParticipant?.id} size={80} />;
     }
 }
 
@@ -55,7 +49,7 @@ class ProfileButtonAvatar extends Component<IProps> {
  */
 function _mapStateToProps(state: IReduxState) {
     return {
-        _localParticipant: getLocalParticipant(state)
+        _localParticipant: getLocalParticipant(state),
     };
 }
 

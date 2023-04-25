@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import { Image, Text, TextStyle, View, ViewStyle } from 'react-native';
+import React, { Component } from "react";
+import { Image, Text, TextStyle, View, ViewStyle } from "react-native";
 
-import Icon from '../../../icons/components/Icon';
-import { StyleType } from '../../../styles/functions.native';
-import { isIcon } from '../../functions';
-import { IAvatarProps } from '../../types';
+import Icon from "../../../icons/components/Icon";
+import { StyleType } from "../../../styles/functions.native";
+import { isIcon } from "../../functions";
+import { IAvatarProps } from "../../types";
 
-import styles from './styles';
+import styles from "./styles";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const DEFAULT_AVATAR = require('../../../../../../images/avatar.png');
+const DEFAULT_AVATAR = require("../../../../../../images/avatar.png");
 
 interface IProps extends IAvatarProps {
-
     /**
      * One of the expected status strings (e.g. 'available') to render a badge on the avatar, if necessary.
      */
@@ -34,7 +33,6 @@ interface IProps extends IAvatarProps {
  * props.
  */
 export default class StatelessAvatar extends Component<IProps> {
-
     /**
      * Instantiates a new {@code Component}.
      *
@@ -69,13 +67,11 @@ export default class StatelessAvatar extends Component<IProps> {
         return (
             <View>
                 <View
-                    style = { [
-                        styles.avatarContainer(size) as ViewStyle,
-                        style
-                    ] }>
-                    { avatar }
+                    style={[styles.avatarContainer(size) as ViewStyle, style]}
+                >
+                    {avatar}
                 </View>
-                { this._renderAvatarStatus() }
+                {this._renderAvatarStatus()}
             </View>
         );
     }
@@ -93,8 +89,8 @@ export default class StatelessAvatar extends Component<IProps> {
         }
 
         return (
-            <View style = { styles.badgeContainer }>
-                <View style = { styles.badge(size, status) as ViewStyle } />
+            <View style={styles.badgeContainer}>
+                <View style={styles.badge(size, status) as ViewStyle} />
             </View>
         );
     }
@@ -109,11 +105,9 @@ export default class StatelessAvatar extends Component<IProps> {
 
         return (
             <Image
-                source = { DEFAULT_AVATAR }
-                style = { [
-                    styles.avatarContent(size),
-                    styles.staticAvatar
-                ] } />
+                source={DEFAULT_AVATAR}
+                style={[styles.avatarContent(size), styles.staticAvatar]}
+            />
         );
     }
 
@@ -128,15 +122,14 @@ export default class StatelessAvatar extends Component<IProps> {
 
         return (
             <View
-                style = { [
+                style={[
                     styles.initialsContainer as ViewStyle,
                     {
-                        backgroundColor: color
-                    }
-                ] }>
-                <Icon
-                    src = { icon }
-                    style = { styles.initialsText(size) } />
+                        backgroundColor: color,
+                    },
+                ]}
+            >
+                <Icon src={icon} style={styles.initialsText(size)} />
             </View>
         );
     }
@@ -151,13 +144,17 @@ export default class StatelessAvatar extends Component<IProps> {
 
         return (
             <View
-                style = { [
+                style={[
                     styles.initialsContainer as ViewStyle,
                     {
-                        backgroundColor: color
-                    }
-                ] }>
-                <Text style = { styles.initialsText(size) as TextStyle }> { initials } </Text>
+                        backgroundColor: color,
+                    },
+                ]}
+            >
+                <Text style={styles.initialsText(size) as TextStyle}>
+                    {" "}
+                    {initials}{" "}
+                </Text>
             </View>
         );
     }
@@ -172,13 +169,13 @@ export default class StatelessAvatar extends Component<IProps> {
 
         return (
             <Image
-                defaultSource = { DEFAULT_AVATAR }
-
+                defaultSource={DEFAULT_AVATAR}
                 // @ts-ignore
-                onError = { onAvatarLoadError }
-                resizeMode = 'cover'
-                source = {{ uri: url }}
-                style = { styles.avatarContent(size) } />
+                onError={onAvatarLoadError}
+                resizeMode="cover"
+                source={{ uri: url }}
+                style={styles.avatarContent(size)}
+            />
         );
     }
 
@@ -193,7 +190,7 @@ export default class StatelessAvatar extends Component<IProps> {
         if (onAvatarLoadError) {
             onAvatarLoadError({
                 ...onAvatarLoadErrorParams,
-                dontRetry: true
+                dontRetry: true,
             });
         }
     }

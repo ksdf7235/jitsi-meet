@@ -506,7 +506,7 @@ export function _handleParticipantError(err: Error) {
  * false.
  */
 export function isRoomValid(room?: string) {
-    return typeof room === "string" && room !== "" && room !== "test";
+    return typeof room === "string" && room !== "" && room !== "profile";
 }
 
 /**

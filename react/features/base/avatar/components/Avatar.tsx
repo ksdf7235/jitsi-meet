@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 
-import { IReduxState } from '../../../app/types';
-import { getParticipantById } from '../../participants/functions';
-import { IParticipant } from '../../participants/types';
-import { getAvatarColor, getInitials, isCORSAvatarURL } from '../functions';
-import { IAvatarProps as AbstractProps } from '../types';
+import { IReduxState } from "../../../app/types";
+import { getParticipantById } from "../../participants/functions";
+import { IParticipant } from "../../participants/types";
+import { getAvatarColor, getInitials, isCORSAvatarURL } from "../functions";
+import { IAvatarProps as AbstractProps } from "../types";
 
-import { StatelessAvatar } from './';
+import { StatelessAvatar } from "./";
+import styled from "styled-components";
 
 export interface IProps {
-
     /**
      * The URL patterns for URLs that needs to be handled with CORS.
      */
@@ -111,7 +111,7 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
      * @static
      */
     static defaultProps = {
-        dynamicColor: true
+        dynamicColor: true,
     };
 
     /**
@@ -122,15 +122,13 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
     constructor(props: P) {
         super(props);
 
-        const {
-            _corsAvatarURLs,
-            url,
-            useCORS
-        } = props;
+        const { _corsAvatarURLs, url, useCORS } = props;
 
         this.state = {
             avatarFailed: false,
-            isUsingCORS: Boolean(useCORS) || Boolean(url && isCORSAvatarURL(url, _corsAvatarURLs))
+            isUsingCORS:
+                Boolean(useCORS) ||
+                Boolean(url && isCORSAvatarURL(url, _corsAvatarURLs)),
         };
 
         this._onAvatarLoadError = this._onAvatarLoadError.bind(this);
@@ -145,7 +143,6 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
         const { _corsAvatarURLs, url } = this.props;
 
         if (prevProps.url !== url) {
-
             // URI changed, so we need to try to fetch it again.
             // Eslint doesn't like this statement, but based on the React doc, it's safe if it's
             // wrapped in a condition: https://reactjs.org/docs/react-component.html#componentdidupdate
@@ -153,7 +150,9 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
             // eslint-disable-next-line react/no-did-update-set-state
             this.setState({
                 avatarFailed: false,
-                isUsingCORS: Boolean(this.props.useCORS) || Boolean(url && isCORSAvatarURL(url, _corsAvatarURLs))
+                isUsingCORS:
+                    Boolean(this.props.useCORS) ||
+                    Boolean(url && isCORSAvatarURL(url, _corsAvatarURLs)),
             });
         }
     }
@@ -176,7 +175,7 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
             size,
             status,
             testId,
-            url
+            url,
         } = this.props;
         const { avatarFailed, isUsingCORS } = this.state;
 
@@ -198,14 +197,16 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
             status,
             testId,
             url: undefined,
-            useCORS: isUsingCORS
+            useCORS: isUsingCORS,
         };
 
         // _loadableAvatarUrl is validated that it can be loaded, but uri (if present) is not, so
         // we still need to do a check for that. And an explicitly provided URI is higher priority than
         // an avatar URL anyhow.
         const useReduxLoadableAvatarURL = avatarFailed || !url;
-        const effectiveURL = useReduxLoadableAvatarURL ? _loadableAvatarUrl : url;
+        const effectiveURL = useReduxLoadableAvatarURL
+            ? _loadableAvatarUrl
+            : url;
 
         if (effectiveURL) {
             avatarProps.onAvatarLoadError = this._onAvatarLoadError;
@@ -220,16 +221,16 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
 
         if (initials) {
             if (dynamicColor) {
-                avatarProps.color = getAvatarColor(colorBase || _initialsBase, _customAvatarBackgrounds ?? []);
+                avatarProps.color = getAvatarColor(
+                    colorBase || _initialsBase,
+                    _customAvatarBackgrounds ?? []
+                );
             }
 
             avatarProps.initials = initials;
         }
 
-        return (
-            <StatelessAvatar
-                { ...avatarProps } />
-        );
+        return <StatelessAvatar {...avatarProps} />;
     }
 
     /**
@@ -242,15 +243,18 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
     _onAvatarLoadError(params: any = {}) {
         const { dontRetry = false } = params;
 
-        if (Boolean(this.props.useCORS) === this.state.isUsingCORS && !dontRetry) {
+        if (
+            Boolean(this.props.useCORS) === this.state.isUsingCORS &&
+            !dontRetry
+        ) {
             // try different mode of loading the avatar.
             this.setState({
-                isUsingCORS: !this.state.isUsingCORS
+                isUsingCORS: !this.state.isUsingCORS,
             });
         } else {
             // we already have tried loading the avatar with and without CORS and it failed.
             this.setState({
-                avatarFailed: true
+                avatarFailed: true,
             });
         }
     }
@@ -265,17 +269,20 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
  */
 export function _mapStateToProps(state: IReduxState, ownProps: IProps) {
     const { colorBase, displayName, participantId } = ownProps;
-    const _participant: IParticipant | undefined = participantId ? getParticipantById(state, participantId) : undefined;
+    const _participant: IParticipant | undefined = participantId
+        ? getParticipantById(state, participantId)
+        : undefined;
     const _initialsBase = _participant?.name ?? displayName;
-    const { corsAvatarURLs } = state['features/base/config'];
+    const { corsAvatarURLs } = state["features/base/config"];
 
     return {
-        _customAvatarBackgrounds: state['features/dynamic-branding'].avatarBackgrounds,
+        _customAvatarBackgrounds:
+            state["features/dynamic-branding"].avatarBackgrounds,
         _corsAvatarURLs: corsAvatarURLs,
         _initialsBase,
         _loadableAvatarUrl: _participant?.loadableAvatarUrl,
         _loadableAvatarUrlUseCORS: _participant?.loadableAvatarUrlUseCORS,
-        colorBase
+        colorBase,
     };
 }
 

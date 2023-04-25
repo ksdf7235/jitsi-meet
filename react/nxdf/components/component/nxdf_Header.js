@@ -4,17 +4,21 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { MediaButton } from "../welcome/Common";
 import { selectLang } from "./lang";
-import { isShown, LangState } from "./lib/atom";
+import { isShown, LangState, PubKey } from "./lib/atom";
+import cookies from "react-cookies";
 
 const Header = (props) => {
+    const expires = new Date();
     // const { lang, setLang } = props;
     const [lang, setLang] = useRecoilState(LangState);
     const [visible, setVisible] = useRecoilState(isShown);
+    const [pubkey, setPubkey] = useRecoilState(PubKey);
     const { StartMeeting } = selectLang(lang);
     const { solana } = window;
     const language = () => {
         setLang(lang === "KR" ? "EN" : "KR");
     };
+
     const history = useHistory();
     const meeting = async () => {
         // if (solana) {
@@ -31,6 +35,37 @@ const Header = (props) => {
 
         setVisible((prev) => !prev);
     };
+
+    const getBalance = async () => {
+        if (window.screen.width > 500) {
+            const [account] = await window.ethereum.request({
+                method: "eth_requestAccounts",
+            });
+            if (account) {
+                setPubkey(account);
+                expires.setFullYear(expires.getFullYear() + 10);
+                cookies.save("pubkey", account, {
+                    path: "/", // 쿠키 값을 저장하는 서버 경로
+                    expires, // 유효 시간
+                });
+                history.push({
+                    pathname: `/profile`,
+                });
+            }
+        } else {
+            if (address) {
+                setPubkey(address);
+                expires.setFullYear(expires.getFullYear() + 10);
+                cookies.save("pubkey", address, {
+                    path: "/", // 쿠키 값을 저장하는 서버 경로
+                    expires, // 유효 시간
+                });
+                history.push({
+                    pathname: `/profile`,
+                });
+            }
+        }
+    };
     return (
         <FirstHeaderLayout>
             <HeaderLayout>
@@ -45,7 +80,7 @@ const Header = (props) => {
                 </HeaderDiv>
                 <HeaderDiv2>
                     <Headerlang onClick={language}>{lang} |</Headerlang>
-                    <HeaderBtn onClick={meeting}>
+                    <HeaderBtn onClick={getBalance}>
                         <img
                             src="/images/video.svg"
                             width="20px"

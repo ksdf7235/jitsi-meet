@@ -21,3 +21,8 @@ export const CompleteVerify = atom({
     key: "compverify",
     default: false,
 });
+
+export const PubKey = atom({
+    key: "PubKey",
+    default: "",
+});
