@@ -7,11 +7,6 @@ import Header from "../component/nxdf_Header";
 import Main from "../component/nxdf_Main";
 import SignUp from "../component/nxdf_signup";
 
-// 제일 바깥쪽 레이아웃 잡기
-const Welcome = styled.div`
-    width: 100%;
-`;
-
 /*
  * Replace the elements below with your own.
  *
@@ -37,5 +32,10 @@ const WelcomePageMain = (props) => {
         </Welcome>
     );
 };
+
+// 제일 바깥쪽 레이아웃 잡기
+const Welcome = styled.div`
+    width: 100%;
+`;
 
 export default WelcomePageMain;
