@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { makeStyles } from "tss-react/mui";
 
 import Icon from "../../../icons/components/Icon";
@@ -12,7 +12,12 @@ import {
     PRESENCE_BUSY_COLOR,
     PRESENCE_IDLE_COLOR,
 } from "../styles";
-
+import { useRecoilState } from "recoil";
+import {
+    ProfileUrl,
+    PubKey,
+} from "../../../../../nxdf/components/component/lib/atom";
+import cookies from "react-cookies";
 interface IProps extends IAvatarProps {
     /**
      * External class name passed through props.
@@ -136,6 +141,17 @@ const StatelessAvatar = ({
     url,
     useCORS,
 }: IProps) => {
+    const profiledata = cookies.load("profile");
+    const [profile, setProfile] = useRecoilState(ProfileUrl);
+    console.log(`profiledata:${profiledata}`);
+
+    useEffect(() => {
+        console.log(`profiledata: ${profiledata}`);
+        if (profile === "") {
+            return setProfile(profiledata);
+        }
+    }, [profile]);
+
     const { classes, cx } = useStyles();
 
     const _getAvatarStyle = (backgroundColor?: string) => {
@@ -194,33 +210,24 @@ const StatelessAvatar = ({
         );
     }
 
-    if (initials) {
+    if (profiledata === "") {
         return (
             <div
-                className={cx(_getAvatarClassName(), _getBadgeClassName())}
+                className={cx(
+                    _getAvatarClassName("defaultAvatar"),
+                    _getBadgeClassName()
+                )}
                 data-testid={testId}
                 id={id}
-                style={_getAvatarStyle(color)}
+                style={_getAvatarStyle()}
             >
-                <div className={classes.initialsContainer}>{initials}</div>
+                <Icon size={"50%"} src={IconUser} />
             </div>
         );
     }
 
     // default avatar
-    return (
-        <div
-            className={cx(
-                _getAvatarClassName("defaultAvatar"),
-                _getBadgeClassName()
-            )}
-            data-testid={testId}
-            id={id}
-            style={_getAvatarStyle()}
-        >
-            <Icon size={"50%"} src={IconUser} />
-        </div>
-    );
+    return <img src={profiledata} width="50%" />;
 };
 
 export default StatelessAvatar;

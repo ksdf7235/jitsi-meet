@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../component/nxdf_Header";
 import { useQuery } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
-import { PubKey } from "../component/lib/atom";
+import { ProfileUrl, PubKey } from "../component/lib/atom";
 import cookies from "react-cookies";
 import { getTestNFTLIST } from "../component/lib/api";
 /*
@@ -12,9 +12,12 @@ import { getTestNFTLIST } from "../component/lib/api";
  * Note: The corresponding styles are in the ./index.styled-components file.
  */
 const ProfilePage = (props) => {
+    const expires = new Date();
     const [PubK, setPubkey] = useRecoilState(PubKey);
+    const [profile, setProfile] = useRecoilState(ProfileUrl);
     const [stakeData, setStake] = useState({});
     const pubkey = cookies.load("pubkey");
+    const prpile = cookies.load("profile");
     useEffect(() => {
         if (PubK === "") {
             return setPubkey(pubkey);
@@ -25,6 +28,15 @@ const ProfilePage = (props) => {
 
     const SetItem = (prop) => {
         setStake(prop);
+        console.log(prop);
+        expires.setFullYear(expires.getFullYear() + 10);
+        cookies.save("profile", prop.image, {
+            path: "/", // 쿠키 값을 저장하는 서버 경로
+            expires, // 유효 시간
+        });
+        setProfile(prop.image);
+        console.log(profile);
+        console.log(`prpile:${prpile}`);
     };
 
     /**

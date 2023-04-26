@@ -26,3 +26,7 @@ export const PubKey = atom({
     key: "PubKey",
     default: "",
 });
+export const ProfileUrl = atom({
+    key: "ProfileUrl",
+    default: "",
+});
