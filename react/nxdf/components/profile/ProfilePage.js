@@ -6,6 +6,8 @@ import { useRecoilState } from "recoil";
 import { ProfileUrl, PubKey } from "../component/lib/atom";
 import cookies from "react-cookies";
 import { getTestNFTLIST } from "../component/lib/api";
+import { ethers } from "ethers";
+import D_one from "../artifacts/contracts/nftTest.sol/TRabbit.json";
 /*
  * Replace the elements below with your own.
  *
@@ -15,6 +17,12 @@ const ProfilePage = (props) => {
     const expires = new Date();
     const [PubK, setPubkey] = useRecoilState(PubKey);
     const [profile, setProfile] = useRecoilState(ProfileUrl);
+    const contractAddress = "0xD8b004C7e56760a9EB704A1CeCF89A7B1989BE83";
+    const provider = new ethers.providers.Web3Provider(window?.ethereum);
+    const signer = provider?.getSigner();
+
+    const contract = new ethers.Contract(contractAddress, D_one.abi, signer);
+
     const [stakeData, setStake] = useState({});
     const pubkey = cookies.load("pubkey");
     const prpile = cookies.load("profile");
@@ -27,6 +35,30 @@ const ProfilePage = (props) => {
     const { isLoading, data } = useQuery(["nftdata", pubkey], getTestNFTLIST);
 
     const SetItem = (prop) => {
+        setStake(prop);
+        console.log(prop);
+        expires.setFullYear(expires.getFullYear() + 10);
+        cookies.save("profile", prop.image, {
+            path: "/", // 쿠키 값을 저장하는 서버 경로
+            expires, // 유효 시간
+        });
+        setProfile(prop.image);
+        console.log(profile);
+        console.log(`prpile:${prpile}`);
+    };
+    const SetStake = async () => {
+        console.log(stakeData?.name?.split("#")[1]);
+        const result = await contract?.setIsBlock(
+            stakeData?.name?.split("#")[1]
+        );
+        if (!result) {
+            console.log(123);
+            return;
+        }
+
+        console.dir(result);
+    };
+    const SetUnStake = (prop) => {
         setStake(prop);
         console.log(prop);
         expires.setFullYear(expires.getFullYear() + 10);
@@ -90,8 +122,8 @@ const ProfilePage = (props) => {
                         </MyNFTsSec>
                     </MyNFTs>
                     <MyStake>
-                        <StakeBtnSec />
-                        <UnStakeBtnSec />
+                        <StakeBtnSec onClick={SetStake} />
+                        <UnStakeBtnSec onClick={SetUnStake} />
                     </MyStake>
                     <MyProfile>
                         <h1>My Profile Utility</h1>
@@ -182,6 +214,7 @@ const WalletSec = styled.div`
 `;
 
 const StakeBtnSec = styled.div`
+    cursor: pointer;
     margin: 0.5rem;
     padding: 0.5rem;
     min-height: 60px;
