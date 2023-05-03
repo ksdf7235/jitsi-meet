@@ -28,7 +28,7 @@ const WelcomePageMain = (props) => {
             <Main grid={grid} setgrid={setgrid} />
             <Grid grid={grid} />
             <Footer />
-            <SignUp />
+            {/* <SignUp /> */}
         </Welcome>
     );
 };

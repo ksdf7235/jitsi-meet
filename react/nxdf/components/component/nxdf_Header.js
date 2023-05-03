@@ -48,9 +48,18 @@ const Header = (props) => {
                     path: "/", // 쿠키 값을 저장하는 서버 경로
                     expires, // 유효 시간
                 });
-                history.push({
-                    pathname: `/profile`,
-                });
+                if (
+                    history.location.pathname !== "/profile" ||
+                    history.location.pathname === "/"
+                ) {
+                    history.push({
+                        pathname: `/profile`,
+                    });
+                } else {
+                    history.push({
+                        pathname: `/test`,
+                    });
+                }
             }
         } else {
             if (address) {

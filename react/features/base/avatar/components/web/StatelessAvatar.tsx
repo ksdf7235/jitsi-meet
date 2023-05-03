@@ -18,6 +18,9 @@ import {
     PubKey,
 } from "../../../../../nxdf/components/component/lib/atom";
 import cookies from "react-cookies";
+import styled from "styled-components";
+import { ImgSt } from "../../../../../nxdf/components/profile/ProfilePage";
+
 interface IProps extends IAvatarProps {
     /**
      * External class name passed through props.
@@ -67,6 +70,9 @@ const useStyles = makeStyles()((theme) => {
             objectFit: "cover",
             textAlign: "center",
             overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
 
             "&.avatar-small": {
                 height: "28px !important",
@@ -143,10 +149,10 @@ const StatelessAvatar = ({
 }: IProps) => {
     const profiledata = cookies.load("profile");
     const [profile, setProfile] = useRecoilState(ProfileUrl);
-    console.log(`profiledata:${profiledata}`);
 
     useEffect(() => {
         console.log(`profiledata: ${profiledata}`);
+        console.log(`profiledata: ${!profiledata}`);
         if (profile === "") {
             return setProfile(profiledata);
         }
@@ -210,7 +216,7 @@ const StatelessAvatar = ({
         );
     }
 
-    if (profiledata === "") {
+    if (profiledata === "" || !profiledata) {
         return (
             <div
                 className={cx(
@@ -227,7 +233,20 @@ const StatelessAvatar = ({
     }
 
     // default avatar
-    return <img src={profiledata} width="50%" />;
+    // return <ImgSt src={profiledata?.image} />;
+    return (
+        <div
+            className={cx(
+                _getAvatarClassName("defaultAvatar"),
+                _getBadgeClassName()
+            )}
+            data-testid={testId}
+            id={id}
+            style={_getAvatarStyle()}
+        >
+            <ImgSt src={profiledata?.image} />{" "}
+        </div>
+    );
 };
 
 export default StatelessAvatar;
