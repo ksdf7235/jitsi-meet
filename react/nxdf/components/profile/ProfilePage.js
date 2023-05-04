@@ -8,6 +8,7 @@ import cookies from "react-cookies";
 import { getTestNFTLIST } from "../component/lib/api";
 import { ethers } from "ethers";
 import D_one from "../artifacts/contracts/nftTest.sol/TRabbit.json";
+import { Network } from "alchemy-sdk";
 /*
  * Replace the elements below with your own.
  *
@@ -17,50 +18,80 @@ const ProfilePage = (props) => {
     const expires = new Date();
     expires.setFullYear(expires.getFullYear() + 10);
     const [PubK, setPubkey] = useRecoilState(PubKey);
-    const [profile, setProfile] = useRecoilState(ProfileUrl);
-    const contractAddress = "0xD8b004C7e56760a9EB704A1CeCF89A7B1989BE83";
+    const pubkey = cookies.load("pubkey");
+    const profileCookie = cookies.load("profile");
+    const contractAddress = "0x1283e980bda6e2762e21508ee28109e22865aaf8";
     const provider = new ethers.providers.Web3Provider(window?.ethereum);
     const signer = provider?.getSigner();
     const contract = new ethers.Contract(contractAddress, D_one.abi, signer);
+    const [profile, setProfile] = useState(profileCookie);
     const [stakeData, setStake] = useState({});
-    const pubkey = cookies.load("pubkey");
-    const profileCookie = cookies.load("profile");
+    const [nftData, setNftData] = useState([]);
     const { isLoading, data } = useQuery(["nftdata", pubkey], getTestNFTLIST);
     useEffect(() => {
         if (PubK === "") {
             return setPubkey(pubkey);
         }
-        if (!profileCookie || (profileCookie === "" && data.length !== 0)) {
+        if (!isLoading) {
+            if (nftData.length !== 0) {
+                return setNftData([]);
+            }
             data?.map(async (props) => {
-                console.log(props?.name?.split("#")[1]);
                 const result = await contract?.getIsBlock(
-                    props?.name?.split("#")[1]
+                    props.name.split("#")[1]
                 );
-                console.log(`여기:${result}`);
+                console.log(parseInt(result));
+                if (parseInt(result) === 0) {
+                    setNftData((nft) => [...nft, props]);
+                } else {
+                    setProfile(props);
+                    cookies.save("profile", props, {
+                        path: "/", // 쿠키 값을 저장하는 서버 경로
+                        expires, // 유효 시간
+                    });
+                }
             });
         }
-        // data?.map((prop) => console.log(prop));
-    }, [pubkey, PubK, setPubkey, isLoading, profileCookie]);
 
-    const SetItem = (prop) => {
+        // data?.map((prop) => console.log(prop));
+    }, [isLoading]);
+
+    const SetItem = async (prop) => {
         setStake(prop);
     };
     const SetStake = async () => {
+        if (profile) {
+            return alert("please unstake nft");
+        }
         const result = await contract?.setIsBlock(
             stakeData?.name?.split("#")[1]
         );
         if (result) {
+            setNftData((prev) => {
+                const res = prev.filter(
+                    (data) =>
+                        data?.name?.split("#")[1] !==
+                        stakeData?.name?.split("#")[1]
+                );
+                return res;
+            });
             cookies.save("profile", stakeData, {
                 path: "/", // 쿠키 값을 저장하는 서버 경로
                 expires, // 유효 시간
             });
+            setProfile(stakeData);
         }
     };
     const SetUnStake = async () => {
+        if (!profile || profile === "") {
+            return alert("please stake nft");
+        }
         const result = await contract?.setIsBlockBeZero(
-            profileCookie?.name?.split("#")[1]
+            profile?.name?.split("#")[1]
         );
         if (result) {
+            setNftData((prev) => [...prev, profile]);
+            setProfile("");
             setStake("");
             cookies.save("profile", "", {
                 path: "/", // 쿠키 값을 저장하는 서버 경로
@@ -99,7 +130,7 @@ const ProfilePage = (props) => {
                     <MyNFTs>
                         <h1>My NFTs</h1>
                         <MyNFTsSec>
-                            {data?.map((props, i) => (
+                            {nftData?.map((props, i) => (
                                 <MyNFTContent
                                     stake={
                                         stakeData?.name?.split("#")[1] ===
@@ -127,44 +158,30 @@ const ProfilePage = (props) => {
                         <h1>My Profile Utility</h1>
                         <MyNFTsSec>
                             <SeletctNFT>
-                                {!profileCookie || profileCookie !== "" ? (
-                                    <>
-                                        <SeletctNFTImg
-                                            src={
-                                                profileCookie?.image ??
-                                                "/images/avatar.png"
-                                            }
-                                            height={"50%"}
-                                            width={"100%"}
-                                        />
-                                        <NFTTitleSec>
-                                            <h4>{profileCookie?.name}</h4>
-                                            <span>
-                                                {`Type : ${
-                                                    profileCookie?.properties
-                                                        ?.files[0]?.type ??
-                                                    "None"
-                                                }`}
-                                            </span>
-                                        </NFTTitleSec>
-                                        <AttrSec>
-                                            {profileCookie?.attributes?.map(
-                                                (data, i) => (
-                                                    <AttrDiv key={"attr" + i}>
-                                                        <AttrSpan>
-                                                            {data?.trait_type}
-                                                        </AttrSpan>
-                                                        <AttrSpan>
-                                                            {data?.value}
-                                                        </AttrSpan>
-                                                    </AttrDiv>
-                                                )
-                                            )}
-                                        </AttrSec>
-                                    </>
-                                ) : (
-                                    <></>
-                                )}
+                                <SeletctNFTImg
+                                    src={profile?.image ?? "/images/avatar.png"}
+                                    height={"50%"}
+                                    width={"100%"}
+                                />
+                                <NFTTitleSec>
+                                    <h4>{profile?.name}</h4>
+                                    <span>
+                                        {`Type : ${
+                                            profile?.properties?.files[0]
+                                                ?.type ?? "None"
+                                        }`}
+                                    </span>
+                                </NFTTitleSec>
+                                <AttrSec>
+                                    {profile?.attributes?.map((data, i) => (
+                                        <AttrDiv key={"attr" + i}>
+                                            <AttrSpan>
+                                                {data?.trait_type}
+                                            </AttrSpan>
+                                            <AttrSpan>{data?.value}</AttrSpan>
+                                        </AttrDiv>
+                                    ))}
+                                </AttrSec>
                             </SeletctNFT>
                         </MyNFTsSec>
                     </MyProfile>
@@ -173,7 +190,6 @@ const ProfilePage = (props) => {
         </Welcome>
     );
 };
-
 // 제일 바깥쪽 레이아웃 잡기
 const Welcome = styled.div`
     width: 100%;

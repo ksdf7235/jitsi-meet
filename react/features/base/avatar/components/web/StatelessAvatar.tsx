@@ -57,7 +57,7 @@ interface IProps extends IAvatarProps {
      */
     useCORS?: boolean;
 }
-
+//아바타 수정
 const useStyles = makeStyles()((theme) => {
     return {
         avatar: {
@@ -83,9 +83,9 @@ const useStyles = makeStyles()((theme) => {
                 height: "16px !important",
                 width: "16px !important",
             },
-
             "& .jitsi-icon": {
-                transform: "translateY(50%)",
+                // 0504 지움
+                //transform: "translateY(50%)",
             },
 
             "& .avatar-svg": {
