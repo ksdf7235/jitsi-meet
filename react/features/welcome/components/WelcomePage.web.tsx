@@ -242,9 +242,7 @@ class WelcomePage extends AbstractWelcomePage<IProps> {
                                 />
                             ) : null}
                         </div>
-                        <h1 className="header-text-title">
-                            {t("welcomepage.headerTitle")}
-                        </h1>
+                        <h1 className="header-text-title">NXDF Meet</h1>
                         <span className="header-text-subtitle">
                             {t("welcomepage.headerSubtitle")}
                         </span>
