@@ -27,6 +27,7 @@ const ProfilePage = (props) => {
     const [profile, setProfile] = useState(profileCookie);
     const [stakeData, setStake] = useState({});
     const [nftData, setNftData] = useState([]);
+    const [Tx, setTx] = useState("");
     const { isLoading, data } = useQuery(["nftdata", pubkey], getTestNFTLIST);
     useEffect(() => {
         if (PubK === "") {
@@ -40,7 +41,6 @@ const ProfilePage = (props) => {
                 const result = await contract?.getIsBlock(
                     props.name.split("#")[1]
                 );
-                console.log(parseInt(result));
                 if (parseInt(result) === 0) {
                     setNftData((nft) => [...nft, props]);
                 } else {
@@ -67,6 +67,7 @@ const ProfilePage = (props) => {
             stakeData?.name?.split("#")[1]
         );
         if (result) {
+            setTx(result.hash);
             setNftData((prev) => {
                 const res = prev.filter(
                     (data) =>
@@ -90,6 +91,7 @@ const ProfilePage = (props) => {
             profile?.name?.split("#")[1]
         );
         if (result) {
+            setTx(result.hash);
             setNftData((prev) => [...prev, profile]);
             setProfile("");
             setStake("");
@@ -125,6 +127,17 @@ const ProfilePage = (props) => {
                         unstake whenever he/she wants not to use this service in
                         this page.
                     </span>
+                    <TxDiv>
+                        <span>
+                            Tx:{" "}
+                            <a
+                                target="_blank"
+                                href={`https://mumbai.polygonscan.com/tx/${Tx}`}
+                            >
+                                {Tx}
+                            </a>
+                        </span>
+                    </TxDiv>
                 </WalletSec>
                 <ProfileSetting>
                     <MyNFTs>
@@ -190,6 +203,10 @@ const ProfilePage = (props) => {
         </Welcome>
     );
 };
+
+const TxDiv = styled.div`
+    margin-top: 1rem;
+`;
 // 제일 바깥쪽 레이아웃 잡기
 const Welcome = styled.div`
     width: 100%;
