@@ -284,6 +284,14 @@ const ProfileSetting = styled.div`
 
 const MyNFTs = styled.div`
     width: 40%;
+    height: 100%;
+    min-width: 200px;
+    min-height: 700px;
+    margin-bottom: 1rem;
+    h1 {
+        align-self: flex-start;
+        justify-self: flex-start;
+    }
 `;
 
 const MyNFTsSec = styled.div`
@@ -332,8 +340,15 @@ const SeletctNFTImg = styled.img`
     max-height: 300px;
     max-width: 300px;
 `;
-const MyProfile = styled.div`
+const MyProfile = styled(MyNFTs)`
     width: 40%;
+    height: 100%;
+    min-width: 200px;
+    min-height: 700px;
+    h1 {
+        align-self: flex-start;
+        justify-self: flex-start;
+    }
 `;
 
 export const ImgSt = styled.img`

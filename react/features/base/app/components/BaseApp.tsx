@@ -22,7 +22,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import WelcomePageMain from "../../../../nxdf/components/welcome/WelcomePageMain";
 import ProfilePage from "../../../../nxdf/components/profile/ProfilePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 /**
  * The type of the React {@code Component} state of {@link BaseApp}.
  */
