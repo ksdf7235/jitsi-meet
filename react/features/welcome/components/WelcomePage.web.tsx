@@ -189,7 +189,7 @@ class WelcomePage extends AbstractWelcomePage<IProps> {
      */
     render() {
         const location = window.location.pathname;
-        const Remover = styled.div`
+        const Remover = styled.div<{ location: string }>`
             visibility: ${(props) =>
                 props.location === "/" || props.location === "/profile"
                     ? "hidden"
