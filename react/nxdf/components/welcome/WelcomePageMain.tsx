@@ -12,7 +12,7 @@ import SignUp from "../component/nxdf_signup";
  *
  * Note: The corresponding styles are in the ./index.styled-components file.
  */
-function WelcomePageMain() {
+const WelcomePageMain = (): JSX.Element | null => {
     const [grid, setgrid] = useState(false);
 
     /**
@@ -31,7 +31,7 @@ function WelcomePageMain() {
             {/* <SignUp /> */}
         </Welcome>
     );
-}
+};
 
 // 제일 바깥쪽 레이아웃 잡기
 const Welcome = styled.div`

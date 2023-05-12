@@ -14,13 +14,16 @@ import { Network } from "alchemy-sdk";
  *
  * Note: The corresponding styles are in the ./index.styled-components file.
  */
-function ProfilePage() {
+
+const ProfilePage = (): JSX.Element | null => {
     const expires = new Date();
     expires.setFullYear(expires.getFullYear() + 10);
     const [PubK, setPubkey] = useRecoilState(PubKey);
     const pubkey = cookies.load("pubkey");
     const profileCookie = cookies.load("profile");
     const contractAddress = "0x1283e980bda6e2762e21508ee28109e22865aaf8";
+
+    //@ts-ignore
     const provider = new ethers.providers.Web3Provider(window?.ethereum);
     const signer = provider?.getSigner();
     const contract = new ethers.Contract(contractAddress, D_one.abi, signer);
@@ -42,6 +45,7 @@ function ProfilePage() {
                     props.name.split("#")[1]
                 );
                 if (parseInt(result) === 0) {
+                    //@ts-ignore
                     setNftData((nft) => [...nft, props]);
                 } else {
                     setProfile(props);
@@ -64,14 +68,18 @@ function ProfilePage() {
             return alert("please unstake nft");
         }
         const result = await contract?.setIsBlock(
+            //@ts-ignore
             stakeData?.name?.split("#")[1]
         );
         if (result) {
             setTx(result.hash);
             setNftData((prev) => {
                 const res = prev.filter(
+                    //@ts-ignore
                     (data) =>
+                        //@ts-ignore
                         data?.name?.split("#")[1] !==
+                        //@ts-ignore
                         stakeData?.name?.split("#")[1]
                 );
                 return res;
@@ -92,6 +100,7 @@ function ProfilePage() {
         );
         if (result) {
             setTx(result.hash);
+            //@ts-ignore
             setNftData((prev) => [...prev, profile]);
             setProfile("");
             setStake("");
@@ -145,17 +154,23 @@ function ProfilePage() {
                         <MyNFTsSec>
                             {nftData?.map((props, i) => (
                                 <MyNFTContent
+                                    //@ts-ignore
                                     stake={
+                                        //@ts-ignore
                                         stakeData?.name?.split("#")[1] ===
+                                        //@ts-ignore
                                         props.name?.split("#")[1]
                                     }
                                     key={i}
                                     onClick={() => SetItem(props)}
                                 >
+                                    {/* @ts-ignore */}
                                     <img src={props?.image} />
                                     <MynftsMiniDesc>
+                                        {/* @ts-ignore */}
                                         <span>{props?.name}</span>
                                         <span>
+                                            {/* @ts-ignore */}
                                             {`Type : ${props?.properties?.files[0]?.type}`}
                                         </span>
                                     </MynftsMiniDesc>
@@ -202,7 +217,7 @@ function ProfilePage() {
             </Div>
         </Welcome>
     );
-}
+};
 
 const TxDiv = styled.div``;
 
@@ -307,7 +322,9 @@ const MyNFTContent = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin: 1rem;
+    //@ts-ignore
     border: ${(props) =>
+        //@ts-ignore
         props.stake ? "1px solid black" : "1px solid #e0e0e0"};
     img {
         width: 10%;

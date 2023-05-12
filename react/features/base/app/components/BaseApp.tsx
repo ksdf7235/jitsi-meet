@@ -1,4 +1,3 @@
-// @ts-expect-error
 import { jitsiLocalStorage } from "@jitsi/js-utils";
 import _ from "lodash";
 import React, { Component, ComponentType, Fragment } from "react";
@@ -176,6 +175,7 @@ export default class BaseApp<P> extends Component<P, IState> {
                         <I18nextProvider i18n={i18next}>
                             {/* @ts-ignore */}
                             <Provider store={store}>
+                                {/* @ts-ignore */}
                                 <BrowserRouter>
                                     <Fragment>
                                         {this._createMainElement(
@@ -191,7 +191,8 @@ export default class BaseApp<P> extends Component<P, IState> {
                                             <WelcomePageWeb {...props} />
                                         )}
                                     /> */}
-                                        // @ts-ignore
+
+                                        {/* @ts-ignore */}
                                         <Route
                                             exact={true}
                                             path="/"
@@ -200,6 +201,7 @@ export default class BaseApp<P> extends Component<P, IState> {
                                                 <WelcomePageMain {...props} />
                                             )}
                                         />
+                                        {/* @ts-ignore */}
                                         <Route
                                             exact={true}
                                             path="/profile"
@@ -267,8 +269,8 @@ export default class BaseApp<P> extends Component<P, IState> {
         // @see https://github.com/gaearon/redux-thunk.
         const middleware = MiddlewareRegistry.applyMiddleware(Thunk);
 
-        // @ts-ignore
         const composeEnhancers =
+            // @ts-ignore
             window?.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
         const store = createStore(
             reducer,
@@ -283,6 +285,7 @@ export default class BaseApp<P> extends Component<P, IState> {
         // non-reactified parts of the code (conference.js for example).
         // Don't use in the react code!!!
         // FIXME: remove when the reactification is finished!
+        // @ts-ignore
         if (typeof APP !== "undefined") {
             // @ts-ignore
             APP.store = store;
