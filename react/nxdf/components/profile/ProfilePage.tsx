@@ -40,6 +40,7 @@ const ProfilePage = (): JSX.Element | null => {
             if (nftData.length !== 0) {
                 return setNftData([]);
             }
+            //@ts-ignore
             data?.map(async (props) => {
                 const result = await contract?.getIsBlock(
                     props.name.split("#")[1]
@@ -60,7 +61,7 @@ const ProfilePage = (): JSX.Element | null => {
         // data?.map((prop) => console.log(prop));
     }, [isLoading]);
 
-    const SetItem = async (prop) => {
+    const SetItem = async (prop: string) => {
         setStake(prop);
     };
     const SetStake = async () => {
@@ -201,6 +202,7 @@ const ProfilePage = (): JSX.Element | null => {
                                     </span>
                                 </NFTTitleSec>
                                 <AttrSec>
+                                    {/* @ts-ignore */}
                                     {profile?.attributes?.map((data, i) => (
                                         <AttrDiv key={"attr" + i}>
                                             <AttrSpan>

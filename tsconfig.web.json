@@ -1,18 +1,24 @@
 {
-    "include": ["react/features/**/*.ts", "react/features/**/*.tsx", "./custom.d.ts", "./globals.d.ts"],
+    "include": [
+        "react/features/**/*.ts",
+        "react/features/**/*.tsx",
+        "./custom.d.ts",
+        "./globals.d.ts"
+    ],
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "module": "es2020",
         "target": "es2020",
         "jsx": "react",
-        "lib": [ "webworker", "ES2020", "DOM" ],
+        "lib": ["webworker", "ES2020", "DOM"],
         "skipLibCheck": true,
         "moduleResolution": "Node",
         "strict": true,
         "noImplicitAny": true,
         "strictPropertyInitialization": false,
         "resolveJsonModule": true,
-        "moduleSuffixes": [".web", ""]
+        "moduleSuffixes": [".web", ""],
+        "ignoreDiagnostics": [7006, 7016, 2571]
     },
     "exclude": [
         "node_modules",
