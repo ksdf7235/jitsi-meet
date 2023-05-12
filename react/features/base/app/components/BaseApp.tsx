@@ -191,10 +191,12 @@ export default class BaseApp<P> extends Component<P, IState> {
                                             <WelcomePageWeb {...props} />
                                         )}
                                     /> */}
+                                        // @ts-ignore
                                         <Route
                                             exact={true}
                                             path="/"
                                             render={(props) => (
+                                                // @ts-ignore
                                                 <WelcomePageMain {...props} />
                                             )}
                                         />
@@ -202,6 +204,7 @@ export default class BaseApp<P> extends Component<P, IState> {
                                             exact={true}
                                             path="/profile"
                                             render={(props) => (
+                                                // @ts-ignore
                                                 <ProfilePage {...props} />
                                             )}
                                         />
