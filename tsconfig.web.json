@@ -17,12 +17,12 @@
         "noImplicitAny": true,
         "strictPropertyInitialization": false,
         "resolveJsonModule": true,
-        "moduleSuffixes": [".web", ""],
-        "ignoreErrors": true
+        "moduleSuffixes": [".web", ""]
     },
     "exclude": [
         "node_modules",
         "react/features/share-room",
+        "react/nxdf",
         "**/mobile/*",
         "**/native/*",
         "**/*.native.ts",
