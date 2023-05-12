@@ -14,7 +14,7 @@ import { Network } from "alchemy-sdk";
  *
  * Note: The corresponding styles are in the ./index.styled-components file.
  */
-const ProfilePage = (props) => {
+function ProfilePage() {
     const expires = new Date();
     expires.setFullYear(expires.getFullYear() + 10);
     const [PubK, setPubkey] = useRecoilState(PubKey);
@@ -202,11 +202,8 @@ const ProfilePage = (props) => {
             </Div>
         </Welcome>
     );
-};
+}
 
-const TxDiv = styled.div`
-    margin-top: 1rem;
-`;
 // 제일 바깥쪽 레이아웃 잡기
 const Welcome = styled.div`
     width: 100%;

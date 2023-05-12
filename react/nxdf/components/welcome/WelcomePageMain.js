@@ -12,7 +12,7 @@ import SignUp from "../component/nxdf_signup";
  *
  * Note: The corresponding styles are in the ./index.styled-components file.
  */
-const WelcomePageMain = (props) => {
+function WelcomePageMain() {
     const [grid, setgrid] = useState(false);
 
     /**
@@ -31,11 +31,6 @@ const WelcomePageMain = (props) => {
             {/* <SignUp /> */}
         </Welcome>
     );
-};
-
-// 제일 바깥쪽 레이아웃 잡기
-const Welcome = styled.div`
-    width: 100%;
-`;
+}
 
 export default WelcomePageMain;
