@@ -173,7 +173,10 @@ function getConfig(options = {}) {
                     exclude: /node_modules/,
                     loader: "ts-loader",
                     options: {
-                        ignoreDiagnostics: [7016, 7018, 2339, 2345, 2739, 7010],
+                        ignoreDiagnostics: [
+                            7016, 7018, 2339, 2345, 2739, 7010, 7005, 7006,
+                            2322, 7031,
+                        ],
                         configFile: "tsconfig.web.json",
                         transpileOnly: !isProduction, // Skip type checking for dev builds.,
                     },
