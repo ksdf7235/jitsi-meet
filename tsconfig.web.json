@@ -18,7 +18,7 @@
         "strictPropertyInitialization": false,
         "resolveJsonModule": true,
         "moduleSuffixes": [".web", ""],
-        "ignoreDiagnostics": [7006, 7016, 2571]
+        "ignoreErrors": [7006, 7016, 2571]
     },
     "exclude": [
         "node_modules",
