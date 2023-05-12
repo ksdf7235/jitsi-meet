@@ -269,7 +269,7 @@ export default class BaseApp<P> extends Component<P, IState> {
 
         // @ts-ignore
         const composeEnhancers =
-            window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+            window?.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
         const store = createStore(
             reducer,
             PersistenceRegistry.getPersistedState(),
