@@ -36,10 +36,11 @@ export const getTestNFTLIST = async ({ queryKey }) => {
     const [_, pubkey] = queryKey;
     const { ownedNfts } = await alchemy.nft.getNftsForOwner(pubkey);
     const list = [];
+    console.log(ownedNfts);
     if (pubkey !== "") {
         ownedNfts.map((data) => {
             return data.contract.address ===
-                "0x1283e980bda6e2762e21508ee28109e22865aaf8" &&
+                "0x64aa21d3c6de8dbda8af8976ffb8ddc83a8010bb" &&
                 data.description !== ""
                 ? list.push(data.rawMetadata)
                 : "";

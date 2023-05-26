@@ -7,7 +7,7 @@ import { ProfileUrl, PubKey } from "../component/lib/atom";
 import cookies from "react-cookies";
 import { getTestNFTLIST } from "../component/lib/api";
 import { ethers } from "ethers";
-import D_one from "../artifacts/contracts/nftTest.sol/TRabbit.json";
+import D_one from "../artifacts/contracts/nftTest.sol/NFT.json";
 import { Network } from "alchemy-sdk";
 /*
  * Replace the elements below with your own.
@@ -21,7 +21,7 @@ const ProfilePage = (): JSX.Element | null => {
     const [PubK, setPubkey] = useRecoilState(PubKey);
     const pubkey = cookies.load("pubkey");
     const profileCookie = cookies.load("profile");
-    const contractAddress = "0x1283e980bda6e2762e21508ee28109e22865aaf8";
+    const contractAddress = "0x64aa21d3c6de8dbda8af8976ffb8ddc83a8010bb";
 
     //@ts-ignore
     const provider = new ethers.providers.Web3Provider(window?.ethereum);
@@ -40,6 +40,7 @@ const ProfilePage = (): JSX.Element | null => {
             if (nftData.length !== 0) {
                 return setNftData([]);
             }
+            console.log(data);
             //@ts-ignore
             data?.map(async (props) => {
                 const result = await contract?.getIsBlock(
