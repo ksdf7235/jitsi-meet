@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { makeStyles } from "tss-react/mui";
 
 import Icon from "../../../icons/components/Icon";
@@ -57,7 +57,7 @@ interface IProps extends IAvatarProps {
      */
     useCORS?: boolean;
 }
-//아바타 수정
+
 const useStyles = makeStyles()((theme) => {
     return {
         avatar: {
@@ -73,7 +73,6 @@ const useStyles = makeStyles()((theme) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-
             "&.avatar-small": {
                 height: "28px !important",
                 width: "28px !important",
@@ -83,9 +82,9 @@ const useStyles = makeStyles()((theme) => {
                 height: "16px !important",
                 width: "16px !important",
             },
+
             "& .jitsi-icon": {
-                // 0504 지움
-                //transform: "translateY(50%)",
+                transform: "translateY(50%)",
             },
 
             "& .avatar-svg": {
@@ -147,18 +146,9 @@ const StatelessAvatar = ({
     url,
     useCORS,
 }: IProps) => {
-    const profiledata = cookies.load("profile");
-    const [profile, setProfile] = useRecoilState(ProfileUrl);
-
-    useEffect(() => {
-        console.log(`profiledata: ${profiledata}`);
-        console.log(`profiledata: ${!profiledata}`);
-        if (profile === "") {
-            return setProfile(profiledata);
-        }
-    }, [profile]);
-
     const { classes, cx } = useStyles();
+
+    const profiledata = cookies.load("profile");
 
     const _getAvatarStyle = (backgroundColor?: string) => {
         return {
