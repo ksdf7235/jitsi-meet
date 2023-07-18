@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Header from "../component/nxdf_Header";
+import Header from "../component/Seongju_Header";
 import { useQuery } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 import { ProfileUrl, PubKey } from "../component/lib/atom";
@@ -134,7 +134,7 @@ const ProfilePage = (): JSX.Element | null => {
                     <span>
                         Your MetaAxel PFP will be registered by staking program.
                         The smart contract lets you not to transfer while you
-                        use NXDF Meet service. However, the PFP holder can
+                        use Seongju Meet service. However, the PFP holder can
                         unstake whenever he/she wants not to use this service in
                         this page.
                     </span>

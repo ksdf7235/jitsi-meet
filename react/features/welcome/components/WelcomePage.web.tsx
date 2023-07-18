@@ -142,7 +142,7 @@ class WelcomePage extends AbstractWelcomePage<IProps> {
         super.componentDidMount();
 
         document.body.classList.add("welcome-page");
-        document.title = "NXDF Meet";
+        document.title = "Seongju Meet";
 
         if (this.state.generateRoomNames) {
             this._updateRoomName();
@@ -225,7 +225,9 @@ class WelcomePage extends AbstractWelcomePage<IProps> {
                         <div className="header-watermark-container">
                             <div className="welcome-watermark">
                                 <Watermarks
-                                    defaultJitsiLogoURL={"/images/NXDFLogo.png"}
+                                    defaultJitsiLogoURL={
+                                        DEFAULT_WELCOME_PAGE_LOGO_URL
+                                    }
                                     noMargins={true}
                                 />
                             </div>
@@ -242,7 +244,7 @@ class WelcomePage extends AbstractWelcomePage<IProps> {
                                 />
                             ) : null}
                         </div>
-                        <h1 className="header-text-title">NXDF Meet</h1>
+                        <h1 className="header-text-title">Seongju Meet</h1>
                         <span className="header-text-subtitle">
                             {t("welcomepage.headerSubtitle")}
                         </span>

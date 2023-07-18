@@ -13,13 +13,9 @@ import {
     PRESENCE_IDLE_COLOR,
 } from "../styles";
 import { useRecoilState } from "recoil";
-import {
-    ProfileUrl,
-    PubKey,
-} from "../../../../../nxdf/components/component/lib/atom";
+
 import cookies from "react-cookies";
 import styled from "styled-components";
-import { ImgSt } from "../../../../../nxdf/components/profile/ProfilePage";
 
 interface IProps extends IAvatarProps {
     /**
@@ -189,35 +185,15 @@ const StatelessAvatar = ({
         );
     }
 
-    if (url) {
-        return (
-            <div className={_getBadgeClassName()}>
-                <img
-                    alt="avatar"
-                    className={_getAvatarClassName()}
-                    crossOrigin={useCORS ? "" : undefined}
-                    data-testid={testId}
-                    id={id}
-                    onError={_onAvatarLoadError}
-                    src={url}
-                    style={_getAvatarStyle()}
-                />
-            </div>
-        );
-    }
-
-    if (profiledata === "" || !profiledata) {
+    if (initials) {
         return (
             <div
-                className={cx(
-                    _getAvatarClassName("defaultAvatar"),
-                    _getBadgeClassName()
-                )}
+                className={cx(_getAvatarClassName(), _getBadgeClassName())}
                 data-testid={testId}
                 id={id}
-                style={_getAvatarStyle()}
+                style={_getAvatarStyle(color)}
             >
-                <Icon size={"50%"} src={IconUser} />
+                <div className={classes.initialsContainer}>{initials}</div>
             </div>
         );
     }
@@ -234,7 +210,7 @@ const StatelessAvatar = ({
             id={id}
             style={_getAvatarStyle()}
         >
-            <ImgSt src={profiledata?.image} />{" "}
+            <Icon size={"50%"} src={IconUser} />
         </div>
     );
 };

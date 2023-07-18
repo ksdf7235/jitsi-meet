@@ -76,7 +76,7 @@ const SignUp = (props) => {
                     </ExitWrapper>
                     <SignHeaderContent>
                         {/* <h1>Sign Up</h1>
-                        <span>Welcome To NXDF-Meet</span> */}
+                        <span>Welcome To Seongju-Meet</span> */}
                     </SignHeaderContent>
                 </SignUpHeader>
                 <SignupLayout>

@@ -10,7 +10,7 @@ const Main = (props) => {
     const { grid, setgrid } = props;
     const [lang, setLang] = useRecoilState(LangState);
     const [visible, setVisible] = useRecoilState(isShown);
-    const { MainHeader, MainDiscription, StartMeeting, MainLearnNXDF } =
+    const { MainHeader, MainDiscription, StartMeeting, MainLearnSeongju } =
         selectLang(lang);
     const { solana } = window;
     const Onclick = () => {
@@ -66,7 +66,7 @@ const Main = (props) => {
                 </MediaDes>
                 <Grid>
                     <GridBtn onClick={Onclick}>
-                        <span>{MainLearnNXDF}</span>
+                        <span>{MainLearnSeongju}</span>
                         <img src="/images/downArrow.svg" />
                     </GridBtn>
                 </Grid>

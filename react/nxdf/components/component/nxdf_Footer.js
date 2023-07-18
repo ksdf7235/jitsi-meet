@@ -10,11 +10,11 @@ const Footer = () => {
                 <FooterDiv>
                     <FooterTitle>
                         <img
-                            src="/images/NXDFLogo.png"
+                            src="/images/SeongjuLogo.png"
                             width="20px"
                             height="20px"
                         />
-                        <span>NXDF</span>
+                        <span>Seongju</span>
                     </FooterTitle>
                 </FooterDiv>
                 <FooterDiv2></FooterDiv2>

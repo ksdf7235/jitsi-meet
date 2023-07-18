@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Footer from "../component/nxdf_Footer";
-import Grid from "../component/nxdf_Grid";
-import Header from "../component/nxdf_Header";
-import Main from "../component/nxdf_Main";
-import SignUp from "../component/nxdf_signup";
+import Footer from "../component/Seongju_Footer";
+import Grid from "../component/Seongju_Grid";
+import Header from "../component/Seongju_Header";
+import Main from "../component/Seongju_Main";
+import SignUp from "../component/Seongju_signup";
 
 /*
  * Replace the elements below with your own.

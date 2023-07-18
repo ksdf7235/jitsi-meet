@@ -81,7 +81,7 @@ const Header = (props) => {
                 <HeaderDiv>
                     <HeaderTitle>
                         <img
-                            src="/images/NXDF_welcome_logo.png"
+                            src="/images/Seongju_welcome_logo.png"
                             width="180px"
                             height="30px"
                         />

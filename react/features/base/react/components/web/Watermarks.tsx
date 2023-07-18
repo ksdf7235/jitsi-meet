@@ -12,7 +12,7 @@ import { translate } from "../../../i18n/functions";
  * @private
  */
 const _RIGHT_WATERMARK_STYLE = {
-    backgroundImage: "url(/images/NXDFLogo.png)",
+    backgroundImage: "url(images/rightwatermark.png)",
 };
 
 /**
@@ -174,7 +174,7 @@ class Watermarks extends Component<IProps, State> {
                             logo: interfaceConfig.APP_NAME,
                         })}
                         className={className}
-                        href={"https://nxdf.io/"}
+                        href={"https://meet.sj.co.kr/"}
                         target="_new"
                     >
                         {reactElement}
@@ -197,7 +197,11 @@ class Watermarks extends Component<IProps, State> {
             const { t } = this.props;
 
             return (
-                <a className="poweredby" href="https://nxdf.io/" target="_new">
+                <a
+                    className="poweredby"
+                    href="https://Seongju.io/"
+                    target="_new"
+                >
                     <span>{t("poweredby")} jitsi.org</span>
                 </a>
             );

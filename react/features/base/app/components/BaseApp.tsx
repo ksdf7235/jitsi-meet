@@ -19,9 +19,10 @@ import { appWillMount, appWillUnmount } from "../actions";
 import logger from "../logger";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter, Route } from "react-router-dom";
-import WelcomePageMain from "../../../../nxdf/components/welcome/WelcomePageMain";
-import ProfilePage from "../../../../nxdf/components/profile/ProfilePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import Welcome from "../../../../seongju/Welcome";
+
 /**
  * The type of the React {@code Component} state of {@link BaseApp}.
  */
@@ -199,18 +200,18 @@ export default class BaseApp<P> extends Component<P, IState> {
                                             path="/"
                                             render={(props) => (
                                                 // @ts-ignore
-                                                <WelcomePageMain {...props} />
+                                                <Welcome {...props} />
                                             )}
                                         />
                                         {/* @ts-ignore */}
-                                        <Route
+                                        {/* <Route
                                             exact={true}
                                             path="/profile"
                                             render={(props) => (
                                                 // @ts-ignore
                                                 <ProfilePage {...props} />
                                             )}
-                                        />
+                                        /> */}
                                     </Fragment>
                                 </BrowserRouter>
                                 {this._renderDialogContainer()}
