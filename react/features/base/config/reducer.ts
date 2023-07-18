@@ -326,7 +326,7 @@ function _translateInterfaceConfig(oldValue: IConfig) {
         ) {
             newValue.defaultLogoUrl = interfaceConfig.DEFAULT_LOGO_URL;
         } else {
-            newValue.defaultLogoUrl = "/images/NXDFLogo.png";
+            newValue.defaultLogoUrl = "images/watermark.svg";
         }
     }
 
