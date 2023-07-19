@@ -141,13 +141,13 @@ function Welcome(props) {
     const { name } = props;
     // const [enterData] = useMutation(ENTER_QUERY);
     const onClick = (hostNameKr, hostNameEng) => {
-        enterData({
-            variables: {
-                participantNameKr: name,
-                hostNameEng,
-                hostNameKr,
-            },
-        });
+        // enterData({
+        //     variables: {
+        //         participantNameKr: name,
+        //         hostNameEng,
+        //         hostNameKr,
+        //     },
+        // });
     };
     return (
         <Layout>
