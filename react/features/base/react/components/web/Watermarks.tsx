@@ -174,7 +174,7 @@ class Watermarks extends Component<IProps, State> {
                             logo: interfaceConfig.APP_NAME,
                         })}
                         className={className}
-                        href={"https://meet.sj.co.kr/"}
+                        href={"https://meet.sj.go.kr/"}
                         target="_new"
                     >
                         {reactElement}
