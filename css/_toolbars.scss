@@ -27,13 +27,14 @@
     left: 0;
     position: absolute;
     right: 0;
-    transition: bottom .3s ease-in;
+    transition: bottom 0.3s ease-in;
     width: 100%;
     pointer-events: none;
     z-index: $toolbarZ + 2;
 
     &.visible {
-        bottom: 0;
+        //0721 툴바 수정
+        bottom: 6vh;
     }
 
     &.no-buttons {
@@ -99,13 +100,13 @@
 }
 
 .toolbox-content-wrapper::after {
-    content: '';
+    content: "";
     background: $newToolbarBackgroundColor;
     padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .beta-tag {
-    background: #36383C;
+    background: #36383c;
     border-radius: 3px;
     color: #fff;
     font-size: 12px;
@@ -115,21 +116,21 @@
 }
 
 .overflow-menu-hr {
-    border-top: 1px solid #4C4D50;
+    border-top: 1px solid #4c4d50;
     border-bottom: 0;
     margin: 8px 0;
 }
 
 div.hangup-button {
-    background-color: #CB2233;
+    background-color: #cb2233;
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
-            background-color: #E04757;
+            background-color: #e04757;
         }
 
         &:active {
-            background-color: #A21B29;
+            background-color: #a21b29;
         }
     }
 
@@ -139,15 +140,15 @@ div.hangup-button {
 }
 
 div.hangup-menu-button {
-    background-color: #CB2233;
+    background-color: #cb2233;
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
-            background-color: #E04757;
+            background-color: #e04757;
         }
 
         &:active {
-            background-color: #A21B29;
+            background-color: #a21b29;
         }
     }
 
@@ -166,13 +167,13 @@ div.hangup-menu-button {
 .fadeIn {
     opacity: 1;
 
-    @include transition(all .3s ease-in);
+    @include transition(all 0.3s ease-in);
 }
 
 .fadeOut {
     opacity: 0;
 
-    @include transition(all .3s ease-out);
+    @include transition(all 0.3s ease-out);
 }
 
 /**
@@ -187,7 +188,6 @@ div.hangup-menu-button {
             background: $newToolbarButtonHoverColor;
         }
     }
-
 }
 
 /**
