@@ -1,17 +1,17 @@
 /* eslint-disable lines-around-comment */
-import { IReduxState } from '../app/types';
-import { isMobileBrowser } from '../base/environment/utils';
-import Platform from '../base/react/Platform';
-import { URI_PROTOCOL_PATTERN } from '../base/util/uri';
-import { isVpaasMeeting } from '../jaas/functions';
+import { IReduxState } from "../app/types";
+import { isMobileBrowser } from "../base/environment/utils";
+import Platform from "../base/react/Platform";
+import { URI_PROTOCOL_PATTERN } from "../base/util/uri";
+import { isVpaasMeeting } from "../jaas/functions";
 
 // @ts-ignore
-import DeepLinkingDesktopPage from './components/DeepLinkingDesktopPage';
+import DeepLinkingDesktopPage from "./components/DeepLinkingDesktopPage";
 // @ts-ignore
-import DeepLinkingMobilePage from './components/DeepLinkingMobilePage';
+import DeepLinkingMobilePage from "./components/DeepLinkingMobilePage";
 // @ts-ignore
-import NoMobileApp from './components/NoMobileApp';
-import { _openDesktopApp } from './openDesktopApp';
+import NoMobileApp from "./components/NoMobileApp";
+import { _openDesktopApp } from "./openDesktopApp";
 /* eslint-enable lines-around-comment */
 
 /**
@@ -29,18 +29,19 @@ export function generateDeepLinkingURL(state: IReduxState) {
     // Link.
 
     const { href } = window.location;
-    const regex = new RegExp(URI_PROTOCOL_PATTERN, 'gi');
+    const regex = new RegExp(URI_PROTOCOL_PATTERN, "gi");
 
     // @ts-ignore
-    const mobileConfig = state['features/base/config'].deeplinking?.[Platform.OS] || {};
+    const mobileConfig =
+        state["features/base/config"].deeplinking?.[Platform.OS] || {};
 
     const { appScheme, appPackage } = mobileConfig;
 
     // Android: use an intent link, custom schemes don't work in all browsers.
     // https://developer.chrome.com/multidevice/android/intents
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
         // https://meet.jit.si/foo -> meet.jit.si/foo
-        const url = href.replace(regex, '').substr(2);
+        const url = href.replace(regex, "").substr(2);
 
         return `intent://${url}#Intent;scheme=${appScheme};package=${appPackage};end`;
     }
@@ -57,34 +58,42 @@ export function generateDeepLinkingURL(state: IReduxState) {
  * @returns {Promise<Component>}
  */
 export function getDeepLinkingPage(state: IReduxState) {
-    const { room } = state['features/base/conference'];
-    const { launchInWeb } = state['features/deep-linking'];
-    const deeplinking = state['features/base/config'].deeplinking || {};
+    const { room } = state["features/base/conference"];
+    const { launchInWeb } = state["features/deep-linking"];
+    const deeplinking = state["features/base/config"].deeplinking || {};
 
     // @ts-ignore
-    const { appScheme } = deeplinking?.[Platform.OS as keyof typeof deeplinking] || {};
+    const { appScheme } =
+        deeplinking?.[Platform.OS as keyof typeof deeplinking] || {};
 
     // Show only if we are about to join a conference.
-    if (launchInWeb
-            || !room
-            || state['features/base/config'].deeplinking?.disabled
-            || (isVpaasMeeting(state) && (!appScheme || appScheme === 'com.8x8.meet'))) {
+    if (
+        launchInWeb ||
+        !room ||
+        //0608 !만 추가해서 deep-linking-mobile 안나타나게 수정했는데 문제생기면 확인
+        !state["features/base/config"].deeplinking?.disabled ||
+        (isVpaasMeeting(state) && (!appScheme || appScheme === "com.8x8.meet"))
+    ) {
         return Promise.resolve();
     }
 
-    if (isMobileBrowser()) { // mobile
-        const mobileAppPromo
-            = typeof interfaceConfig === 'object'
-                && interfaceConfig.MOBILE_APP_PROMO;
+    if (isMobileBrowser()) {
+        // mobile
+        const mobileAppPromo =
+            typeof interfaceConfig === "object" &&
+            interfaceConfig.MOBILE_APP_PROMO;
 
         return Promise.resolve(
-            typeof mobileAppPromo === 'undefined' || Boolean(mobileAppPromo)
-                ? DeepLinkingMobilePage : NoMobileApp);
+            typeof mobileAppPromo === "undefined" || Boolean(mobileAppPromo)
+                ? DeepLinkingMobilePage
+                : NoMobileApp
+        );
     }
 
     return _openDesktopApp(state).then(
         // eslint-disable-next-line no-confusing-arrow
-        result => result ? DeepLinkingDesktopPage : undefined);
+        (result) => (result ? DeepLinkingDesktopPage : undefined)
+    );
 }
 
 /**
