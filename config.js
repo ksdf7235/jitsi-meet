@@ -9,17 +9,20 @@ var subdir = '<!--# echo var="subdir" default="" -->';
 var subdomain = '<!--# echo var="subdomain" default="" -->';
 
 if (subdomain) {
-    subdomain = subdomain.substr(0, subdomain.length - 1).split('.')
-        .join('_')
-        .toLowerCase() + '.';
+    subdomain =
+        subdomain
+            .substr(0, subdomain.length - 1)
+            .split(".")
+            .join("_")
+            .toLowerCase() + ".";
 }
 
 // In case of no ssi provided by the webserver, use empty strings
-if (subdir.startsWith('<!--')) {
-    subdir = '';
+if (subdir.startsWith("<!--")) {
+    subdir = "";
 }
-if (subdomain.startsWith('<!--')) {
-    subdomain = '';
+if (subdomain.startsWith("<!--")) {
+    subdomain = "";
 }
 
 var enableJaaS = false;
@@ -30,7 +33,7 @@ var config = {
 
     hosts: {
         // XMPP domain.
-        domain: 'jitsi-meet.example.com',
+        domain: "jitsi-meet.example.com",
 
         // When using authentication, domain for guest users.
         // anonymousdomain: 'guest.example.com',
@@ -42,11 +45,11 @@ var config = {
         // focus: 'focus.jitsi-meet.example.com',
 
         // XMPP MUC domain. FIXME: use XEP-0030 to discover it.
-        muc: 'conference.' + subdomain + 'jitsi-meet.example.com',
+        muc: "conference." + subdomain + "jitsi-meet.example.com",
     },
 
     // BOSH URL. FIXME: use XEP-0156 to discover it.
-    bosh: 'https://jitsi-meet.example.com/' + subdir + 'http-bind',
+    bosh: "https://jitsi-meet.example.com/" + subdir + "http-bind",
 
     // Websocket URL (XMPP)
     // websocket: 'wss://jitsi-meet.example.com/' + subdir + 'xmpp-websocket',
@@ -63,7 +66,6 @@ var config = {
         // which does not match ignoreDomain, falling back to the first one that matches
         // ignoreDomain. Has no effect if undefined.
         // ignoreDomain: 'example.com',
-
         // Prefer SCTP (WebRTC data channels over the media path) over a colibri websocket.
         // If SCTP is available in the backend it will be used instead of a WS. Defaults to
         // false (SCTP is used only if available and no WS are available).
@@ -77,21 +79,16 @@ var config = {
         // Disables the End to End Encryption feature. Useful for debugging
         // issues related to insertable streams.
         // disableE2EE: false,
-
         // Enables XMPP WebSocket (as opposed to BOSH) for the given amount of users.
         // mobileXmppWsThreshold: 10, // enable XMPP WebSockets on mobile for 10% of the users
-
         // P2P test mode disables automatic switching to P2P when there are 2
         // participants in the conference.
         // p2pTestMode: false,
-
         // Enables the test specific features consumed by jitsi-meet-torture
         // testMode: false,
-
         // Disables the auto-play behavior of *all* newly created video element.
         // This is useful when the client runs on a host with limited resources.
         // noAutoPlayVideo: false,
-
         // Enable callstats only for a percentage of users.
         // This takes a value between 0 and 100 which determines the probability for
         // the callstats to be enabled.
@@ -134,7 +131,6 @@ var config = {
     // Disables ICE/TCP by filtering out local and remote TCP candidates in
     // signalling.
     // webrtcIceTcpDisable: false,
-
 
     // Media
     //
@@ -911,7 +907,6 @@ var config = {
     // will not function.
     // disableThirdPartyRequests: false,
 
-
     // Peer-To-Peer mode: used (if enabled) when there are just 2 participants.
     //
 
@@ -945,30 +940,24 @@ var config = {
 
         // The STUN servers that will be used in the peer to peer connections
         stunServers: [
-
             // { urls: 'stun:jitsi-meet.example.com:3478' },
-            { urls: 'stun:meet-jit-si-turnrelay.jitsi.net:443' },
+            { urls: "stun:meet-jit-si-turnrelay.jitsi.net:443" },
         ],
     },
 
     analytics: {
         // True if the analytics should be disabled
         // disabled: false,
-
         // The Google Analytics Tracking ID:
         // googleAnalyticsTrackingId: 'your-tracking-id-UA-123456-1',
-
         // Matomo configuration:
         // matomoEndpoint: 'https://your-matomo-endpoint/',
         // matomoSiteID: '42',
-
         // The Amplitude APP Key:
         // amplitudeAPPKey: '<APP_KEY>',
-
         // Obfuscates room name sent to analytics (amplitude, rtcstats)
         // Default value is false.
         // obfuscateRoomName: false,
-
         // Configuration for the rtcstats server:
         // By enabling rtcstats server every time a conference is joined the rtcstats
         // module connects to the provided rtcstatsEndpoint and sends statistics regarding
@@ -976,19 +965,15 @@ var config = {
         // interval.
         // rtcstatsEnabled: false,
         // rtcstatsStoreLogs: false,
-
         // In order to enable rtcstats one needs to provide a endpoint url.
         // rtcstatsEndpoint: wss://rtcstats-server-pilot.jitsi.net/,
-
         // The interval at which rtcstats will poll getStats, defaults to 10000ms.
         // If the value is set to 0 getStats won't be polled and the rtcstats client
         // will only send data related to RTCPeerConnection events.
         // rtcstatsPollInterval: 10000,
-
         // This determines if rtcstats sends the SDP to the rtcstats server or replaces
         // all SDPs with an empty string instead.
         // rtcstatsSendSdp: false,
-
         // Array of script URLs to load as lib-jitsi-meet "analytics handlers".
         // scriptURLs: [
         //      "libs/analytics-ga.min.js", // google-analytics
@@ -1095,7 +1080,7 @@ var config = {
     // DEPRECATED! Use deeplinking.disabled instead.
     // If true, any checks to handoff to another application will be prevented
     // and instead the app will continue to display in the current browser.
-    // disableDeepLinking: false,
+    disableDeepLinking: true,
 
     // The deeplinking config.
     // For information about the properties of
@@ -1590,7 +1575,8 @@ config.flags.receiveMultipleVideoStreams = true;
 
 // Set the default values for JaaS customers
 if (enableJaaS) {
-    config.dialInNumbersUrl = 'https://conference-mapper.jitsi.net/v1/access/dids';
-    config.dialInConfCodeUrl = 'https://conference-mapper.jitsi.net/v1/access';
+    config.dialInNumbersUrl =
+        "https://conference-mapper.jitsi.net/v1/access/dids";
+    config.dialInConfCodeUrl = "https://conference-mapper.jitsi.net/v1/access";
     config.roomPasswordNumberOfDigits = 10; // skip re-adding it (do not remove comment)
 }
