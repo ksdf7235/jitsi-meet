@@ -1080,7 +1080,7 @@ var config = {
     // DEPRECATED! Use deeplinking.disabled instead.
     // If true, any checks to handoff to another application will be prevented
     // and instead the app will continue to display in the current browser.
-    disableDeepLinking: true,
+    // disableDeepLinking: true,
 
     // The deeplinking config.
     // For information about the properties of
