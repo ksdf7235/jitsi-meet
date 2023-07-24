@@ -70,7 +70,7 @@ export function getDeepLinkingPage(state: IReduxState) {
     if (
         launchInWeb ||
         !room ||
-        //0608 !만 추가해서 deep-linking-mobile 안나타나게 수정했는데 문제생기면 확인
+        // 0608 !만 추가해서 deep-linking-mobile 안나타나게 수정했는데 문제생기면 확인
         !state["features/base/config"].deeplinking?.disabled ||
         (isVpaasMeeting(state) && (!appScheme || appScheme === "com.8x8.meet"))
     ) {

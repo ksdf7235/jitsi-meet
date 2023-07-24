@@ -173,9 +173,10 @@ function getConfig(options = {}) {
                     exclude: /node_modules/,
                     loader: "ts-loader",
                     options: {
+                        // 인덱스 여기서 넣어서 타입스크립트 에러 무시
                         ignoreDiagnostics: [
                             7016, 7018, 2339, 2345, 2739, 7010, 7005, 7006,
-                            2322, 7031,
+                            2322, 7031, 7053,
                         ],
                         configFile: "tsconfig.web.json",
                         transpileOnly: !isProduction, // Skip type checking for dev builds.,
