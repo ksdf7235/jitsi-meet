@@ -209,7 +209,8 @@
         "validate": "npm ls",
         "tsc-test:web": "tsc --project tsconfig.web.json --listFilesOnly | grep -v node_modules | grep native",
         "tsc-test:native": "tsc --project tsconfig.native.json --listFilesOnly | grep -v node_modules | grep web",
-        "start": "make dev"
+        "start": "make dev",
+        "build": "webpack"
     },
     "resolutions": {
         "@types/react": "17.0.14",
