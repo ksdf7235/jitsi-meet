@@ -145,13 +145,12 @@ class Watermarks extends Component<IProps, State> {
      * @returns {ReactElement|null}
      */
     _renderJitsiWatermark() {
-        const { WaterMarkUrl } = division_config;
+        const { WaterMarkUrl, WaterMarkLink } = division_config;
         const { _logoLink, _logoUrl, _showJitsiWatermark } = this.props;
         const { noMargins, t } = this.props;
         const className = `watermark leftwatermark ${
             noMargins ? "no-margin" : ""
         }`;
-        console.log(`WaterMarkUrl:${WaterMarkUrl}`);
 
         let reactElement = null;
 
@@ -170,7 +169,7 @@ class Watermarks extends Component<IProps, State> {
                             logo: interfaceConfig.APP_NAME,
                         })}
                         className={className}
-                        href={_logoLink}
+                        href={WaterMarkLink}
                         target="_new"
                     >
                         {reactElement}

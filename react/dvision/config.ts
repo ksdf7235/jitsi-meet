@@ -1,5 +1,6 @@
 export const division_config = {
     WaterMarkUrl: "images/dvision/watermark.png",
-    WelcomeBgImage: "dvision_main_page.png",
+    WaterMarkLink: "https://test.nxdf.io",
+    WelcomeBgImage: "images/dvision/dvision_main_page.png",
     AppName: "Dvision",
 };

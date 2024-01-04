@@ -1,7 +1,8 @@
 /**
  * Style variables
  */
-$baseFontFamily: -apple-system, BlinkMacSystemFont, 'open_sanslight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$baseFontFamily: -apple-system, BlinkMacSystemFont, "open_sanslight",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 /**
  * Size variables.
@@ -45,7 +46,7 @@ $filmstripVideosZ: $toolbarZ + 1;
 /**
  * Unsupported browser
  */
-$primaryUnsupportedBrowserButtonBgColor: #0052CC;
+$primaryUnsupportedBrowserButtonBgColor: #0052cc;
 $unsupportedBrowserButtonBgColor: rgba(9, 30, 66, 0.04);
 $unsupportedBrowserTextColor: #4a4a4a;
 $unsupportedBrowserTextSmallFontSize: 17px;
@@ -70,8 +71,13 @@ $welcomePageDescriptionColor: #fff;
 $welcomePageFontFamily: inherit;
 $welcomePageBackground: none;
 $welcomePageTitleColor: #fff;
-
-$welcomePageHeaderBackground: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../images/welcome-background.png');
+//dvision welcome 백그라운드 이미지 변경함
+$welcomePageHeaderBackground: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2)
+    ),
+    url("../images/dvision/dvision_main_page.png");
 $welcomePageHeaderBackgroundPosition: center;
 $welcomePageHeaderBackgroundRepeat: none;
 $welcomePageHeaderBackgroundSize: cover;
@@ -79,9 +85,9 @@ $welcomePageHeaderPaddingBottom: 15px;
 $welcomePageHeaderTitleMaxWidth: initial;
 $welcomePageHeaderTextAlign: center;
 
-$welcomePageHeaderContainerMarginTop: 104px;
+$welcomePageHeaderContainerMarginTop: 30vh;
 $welcomePageHeaderContainerDisplay: flex;
-$welcomePageHeaderContainerMargin: $welcomePageHeaderContainerMarginTop auto 0;
+$welcomePageHeaderContainerMargin: 30vh auto 0;
 
 $welcomePageHeaderTextTitleMarginBottom: 0;
 $welcomePageHeaderTextTitleFontSize: 42px;
