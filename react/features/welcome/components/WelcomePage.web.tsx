@@ -151,9 +151,10 @@ class WelcomePage extends AbstractWelcomePage<IProps> {
      */
     componentDidMount() {
         super.componentDidMount();
+        const { AppName } = division_config;
 
         document.body.classList.add("welcome-page");
-        document.title = interfaceConfig.APP_NAME;
+        document.title = AppName;
 
         if (this.state.generateRoomNames) {
             this._updateRoomName();

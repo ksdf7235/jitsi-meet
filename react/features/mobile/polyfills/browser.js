@@ -1,11 +1,11 @@
-import { DOMParser } from '@xmldom/xmldom';
-import { Platform } from 'react-native';
-import BackgroundTimer from 'react-native-background-timer';
+import { DOMParser } from "@xmldom/xmldom";
+import { Platform } from "react-native";
+import BackgroundTimer from "react-native-background-timer";
 
-import 'promise.allsettled/auto'; // Promise.allSettled.
-import 'react-native-url-polyfill/auto'; // Complete URL polyfill.
+import "promise.allsettled/auto"; // Promise.allSettled.
+import "react-native-url-polyfill/auto"; // Complete URL polyfill.
 
-import Storage from './Storage';
+import Storage from "./Storage";
 
 /**
  * Implements an absolute minimum of the common logic of
@@ -21,16 +21,19 @@ import Storage from './Storage';
 function _querySelector(node, selectors) {
     let element = null;
 
-    node && _visitNode(node, n => {
-        if (n.nodeType === 1 /* ELEMENT_NODE */
-                && n.nodeName === selectors) {
-            element = n;
+    node &&
+        _visitNode(node, (n) => {
+            if (
+                n.nodeType === 1 /* ELEMENT_NODE */ &&
+                n.nodeName === selectors
+            ) {
+                element = n;
 
-            return true;
-        }
+                return true;
+            }
 
-        return false;
-    });
+            return false;
+        });
 
     return element;
 }
@@ -65,7 +68,7 @@ function _visitNode(node, callback) {
     return false;
 }
 
-(global => {
+((global) => {
     // DOMParser
     //
     // Required by:
@@ -76,7 +79,7 @@ function _visitNode(node, callback) {
     //
     // Required by:
     // - jQuery
-    if (typeof global.addEventListener === 'undefined') {
+    if (typeof global.addEventListener === "undefined") {
         // eslint-disable-next-line no-empty-function
         global.addEventListener = () => {};
     }
@@ -85,7 +88,7 @@ function _visitNode(node, callback) {
     //
     // Required by:
     // - features/base/conference/middleware
-    if (typeof global.removeEventListener === 'undefined') {
+    if (typeof global.removeEventListener === "undefined") {
         // eslint-disable-next-line no-empty-function
         global.removeEventListener = () => {};
     }
@@ -95,17 +98,17 @@ function _visitNode(node, callback) {
     // Required by:
     // - jQuery
     // - Strophe
-    if (typeof global.document === 'undefined') {
-        const document
-            = new DOMParser().parseFromString(
-                '<html><head></head><body></body></html>',
-                'text/xml');
+    if (typeof global.document === "undefined") {
+        const document = new DOMParser().parseFromString(
+            "<html><head></head><body></body></html>",
+            "text/xml"
+        );
 
         // document.addEventListener
         //
         // Required by:
         // - jQuery
-        if (typeof document.addEventListener === 'undefined') {
+        if (typeof document.addEventListener === "undefined") {
             // eslint-disable-next-line no-empty-function
             document.addEventListener = () => {};
         }
@@ -114,28 +117,28 @@ function _visitNode(node, callback) {
         //
         // Required by:
         // - herment
-        if (typeof document.cookie === 'undefined') {
-            document.cookie = '';
+        if (typeof document.cookie === "undefined") {
+            document.cookie = "";
         }
 
         // document.implementation.createHTMLDocument
         //
         // Required by:
         // - jQuery
-        if (typeof document.implementation.createHTMLDocument === 'undefined') {
-            document.implementation.createHTMLDocument = function(title = '') {
-                const htmlDocument
-                    = new DOMParser().parseFromString(
-                        `<html>
+        if (typeof document.implementation.createHTMLDocument === "undefined") {
+            document.implementation.createHTMLDocument = function (title = "") {
+                const htmlDocument = new DOMParser().parseFromString(
+                    `<html>
                             <head><title>${title}</title></head>
                             <body></body>
                         </html>`,
-                        'text/xml');
+                    "text/xml"
+                );
 
-                Object.defineProperty(htmlDocument, 'body', {
+                Object.defineProperty(htmlDocument, "body", {
                     get() {
-                        return htmlDocument.getElementsByTagName('body')[0];
-                    }
+                        return htmlDocument.getElementsByTagName("body")[0];
+                    },
                 });
 
                 return htmlDocument;
@@ -146,12 +149,13 @@ function _visitNode(node, callback) {
         //
         // Required by:
         // - lib-jitsi-meet/modules/xmpp
-        const elementPrototype
-            = Object.getPrototypeOf(document.documentElement);
+        const elementPrototype = Object.getPrototypeOf(
+            document.documentElement
+        );
 
         if (elementPrototype) {
-            if (typeof elementPrototype.querySelector === 'undefined') {
-                elementPrototype.querySelector = function(selectors) {
+            if (typeof elementPrototype.querySelector === "undefined") {
+                elementPrototype.querySelector = function (selectors) {
                     return _querySelector(this, selectors);
                 };
             }
@@ -160,8 +164,8 @@ function _visitNode(node, callback) {
             //
             // Required by:
             // - lib-jitsi-meet ChatRoom#onPresence parsing
-            if (typeof elementPrototype.remove === 'undefined') {
-                elementPrototype.remove = function() {
+            if (typeof elementPrototype.remove === "undefined") {
+                elementPrototype.remove = function () {
                     if (this.parentNode !== null) {
                         this.parentNode.removeChild(this);
                     }
@@ -172,8 +176,8 @@ function _visitNode(node, callback) {
             //
             // Required by:
             // - jQuery's .append method
-            if (!elementPrototype.hasOwnProperty('innerHTML')) {
-                Object.defineProperty(elementPrototype, 'innerHTML', {
+            if (!elementPrototype.hasOwnProperty("innerHTML")) {
+                Object.defineProperty(elementPrototype, "innerHTML", {
                     get() {
                         return this.childNodes.toString();
                     },
@@ -184,13 +188,13 @@ function _visitNode(node, callback) {
                         // children of the element.
 
                         // Remove all of element's children.
-                        this.textContent = '';
+                        this.textContent = "";
 
                         // Parse the content string.
-                        const d
-                            = new DOMParser().parseFromString(
-                                `<div>${innerHTML}</div>`,
-                                'text/xml');
+                        const d = new DOMParser().parseFromString(
+                            `<div>${innerHTML}</div>`,
+                            "text/xml"
+                        );
 
                         // Assign the resulting nodes as children of the
                         // element.
@@ -198,10 +202,10 @@ function _visitNode(node, callback) {
                         let child;
 
                         // eslint-disable-next-line no-cond-assign
-                        while (child = documentElement.firstChild) {
+                        while ((child = documentElement.firstChild)) {
                             this.appendChild(child);
                         }
-                    }
+                    },
                 });
             }
 
@@ -209,8 +213,8 @@ function _visitNode(node, callback) {
             //
             // Required by:
             // - lib-jitsi-meet ChatRoom#onPresence parsing
-            if (!elementPrototype.hasOwnProperty('children')) {
-                Object.defineProperty(elementPrototype, 'children', {
+            if (!elementPrototype.hasOwnProperty("children")) {
+                Object.defineProperty(elementPrototype, "children", {
                     get() {
                         const nodes = this.childNodes;
                         const children = [];
@@ -226,7 +230,7 @@ function _visitNode(node, callback) {
                         }
 
                         return children;
-                    }
+                    },
                 });
             }
         }
@@ -235,13 +239,13 @@ function _visitNode(node, callback) {
     }
 
     // location
-    if (typeof global.location === 'undefined') {
+    if (typeof global.location === "undefined") {
         global.location = {
-            href: '',
+            href: "",
 
             // Required by:
             // - lib-jitsi-meet/modules/xmpp/xmpp.js
-            search: ''
+            search: "",
         };
     }
 
@@ -252,11 +256,11 @@ function _visitNode(node, callback) {
         //
         // Required by:
         // - lib-jitsi-meet/modules/browser/BrowserDetection.js
-        let userAgent = navigator.userAgent || '';
+        let userAgent = navigator.userAgent || "";
 
         // react-native/version
-        const { name, version } = require('react-native/package.json');
-        let rn = name || 'react-native';
+        const { name, version } = require("react-native/package.json");
+        let rn = name || "react-native";
 
         version && (rn += `/${version}`);
         if (userAgent.indexOf(rn) === -1) {
@@ -274,7 +278,7 @@ function _visitNode(node, callback) {
     }
 
     // WebRTC
-    require('./webrtc');
+    require("./webrtc");
 
     // Performance API
 
@@ -282,7 +286,7 @@ function _visitNode(node, callback) {
     // performance object itself we extract it here to avoid infinite recursion.
     const performanceNow = global.performance.now;
 
-    const perf = require('react-native-performance');
+    const perf = require("react-native-performance");
 
     global.performance = perf.default;
     global.performance.now = performanceNow;
@@ -292,16 +296,18 @@ function _visitNode(node, callback) {
     //
     // React Native's timers won't run while the app is in the background, this
     // is a known limitation. Replace them with a background-friendly alternative.
-    if (Platform.OS === 'android') {
-        global.clearTimeout = BackgroundTimer.clearTimeout.bind(BackgroundTimer);
-        global.clearInterval = BackgroundTimer.clearInterval.bind(BackgroundTimer);
+    if (Platform.OS === "android") {
+        global.clearTimeout =
+            BackgroundTimer.clearTimeout.bind(BackgroundTimer);
+        global.clearInterval =
+            BackgroundTimer.clearInterval.bind(BackgroundTimer);
         global.setInterval = BackgroundTimer.setInterval.bind(BackgroundTimer);
         global.setTimeout = (fn, ms = 0) => BackgroundTimer.setTimeout(fn, ms);
     }
 
     // localStorage
-    if (typeof global.localStorage === 'undefined') {
-        global.localStorage = new Storage('@jitsi-meet/');
+    if (typeof global.localStorage === "undefined") {
+        global.localStorage = new Storage("@jitsi-meet/");
     }
 
     // sessionStorage
@@ -309,8 +315,7 @@ function _visitNode(node, callback) {
     // Required by:
     // - herment
     // - Strophe
-    if (typeof global.sessionStorage === 'undefined') {
+    if (typeof global.sessionStorage === "undefined") {
         global.sessionStorage = new Storage();
     }
-
 })(global || window || this); // eslint-disable-line no-invalid-this
